@@ -3,6 +3,8 @@ Eclectic
 
 A theme for high performance customizable hugo websites.
 
+![Eclectic Theme](theme.jpg?raw=true "Eclectic Theme")
+
 ## Layout Types
 
 * `Default` No neeed to enter the type parameter. Default is a blog post.
@@ -67,7 +69,7 @@ CSS Grids are used for column arrangements in the most logical manner.
 * `Site.Params.sidebar` - Shared sidebar for all posts. Will be available under the post specific sidebar.
 * `Site.Params.sharedHeader` - List of sections where the header has no changes (like blogs unless we have a submenu). This cached headers to improve performance.
 * `Site.Params.Tex` - tex2svg hosted location.
-* ``Site.Params.Guitar` - guitar2svg hosted location.
+* `Site.Params.Guitar` - guitar2svg hosted location.
 
 ## Browsers
 
@@ -86,4 +88,4 @@ CSS Grids are used for column arrangements in the most logical manner.
 
 * `fig` Same as `figure`, but added support for responsive resizing of images.
 * `tex` Renders Latex as SVG. Optional parameter `inline` for inline latex. Needs `Site.Params.Tex` for the `tex2svg` hosting.
-* `guitar` Renders guitar tabs and chords using jtab. Needs ``Site.Params.Guitar` for the `guitar2svg` hosting.
+* `guitar` Renders guitar tabs and chords using jtab. Needs `Site.Params.Guitar` for the `guitar2svg` hosting.
