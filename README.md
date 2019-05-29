@@ -9,9 +9,11 @@ A theme for high performance customizable hugo websites.
 
 ## Layout Types
 
-* `Default` No neeed to enter the type parameter. Default is a blog post.
-* `Simple` Used for pages where the content does not have a sidebar, just header, rendered markdown and footer. Supported front matter additions
+* `default` No neeed to enter the type parameter. Default is a blog post.
+* `simple` Used for pages where the content does not have a sidebar, just header, rendered markdown and footer. Supported front matter additions
   * `subtitle` For subtitle.
+* `contact` Used for Contact Us pages.
+* `meta` Special page type for having sections and nested content. Used to create the home page. See metapages below for usage.
 
 ## Images
 * `assets/image/favicon.png` - Favicon PNG Version
@@ -92,3 +94,40 @@ CSS Grids are used for column arrangements in the most logical manner.
 * `fig` Same as `figure`, but added support for responsive resizing of images.
 * `tex` Renders Latex as SVG. Optional parameter `inline` for inline latex. Needs `Site.Params.Tex` for the `tex2svg` hosting.
 * `guitar` Renders guitar tabs and chords using jtab. Needs `Site.Params.Guitar` for the `guitar2svg` hosting.
+
+## Metapages
+Metapages are pages built using structured data and provide advanced styling and grouping into columns, support for carousels, lists etc. In the front matter for a meta page, you can supply the following information to render structured data:
+* `title` The title of the section
+* `subtitle` Section's subtitle
+* `image` Top level image for the section:
+  * `href` relative location fo the image inside assets folder.
+  * `alt` Alt text to the image
+  * `width` Desired width
+  * `height` Desired height
+* `content` Markdown content
+* `icon` Section icon (Can be a file relative to assets or a fontawesome name eg link for `fa-link`)
+* `items` List of items to display in the section. Each item contains the following:
+  * `title` Item's title
+  * `content` Markdown content of the item
+  * `image` Image for the item. Contains the following:
+    * `href` relative location
+    * `width` desired width
+    * `height` desired height
+    * `alt` Alt text to the image
+    * `anchor` Anchor location for resizing the image
+  * `attribution` Markdown content for image attribution.
+  * `icon` Contains the item's icon. Consists of:
+    * `href` relative location
+    * `alt` Alt text
+    * `width` Element width
+    * `height` Element height
+* `type` Section type. Can be one fo the following:
+  * Unspecified content grouped into columns as described in column arrangement.
+  * `left-image` Full sized image floated to the left.
+  * `item-icon-left` Icon is shown to the left of the item in the grid
+  * `full-width` Each item takes full width instead of being placed in the grid.
+  * `max-2` Alternate grid with maximum items specified each row to be 2.
+  * `filter` Provides a filter list. The top level has additional parameter called `filter` for the default filter. Each item has a a space separated list of filters in a field called `filter` applicable to the item.
+  * `blog` to show recent blog entries. Has additional parameters `count` which is the number of blog items and `section` which is the name of the section to get recent posts from.
+  * `carousel` Provides support for running a carousel of content.
+  * `centered` Provides content centered on the page behind the background image supplied as `background`
