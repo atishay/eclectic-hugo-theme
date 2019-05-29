@@ -1,7 +1,8 @@
 {
   "name": "{{.Site.Title}}",
   "short_name": "{{.Site.Title}}",
-  {{ $icon := resources.Get "image/favicon.png" }}
+  {{- with .Resources.GetMatch "image/favicon.png" -}}
+  {{ $icon := . }}
   "icons": [{
       "src": "{{ ($icon.Resize "192x192").RelPermalink }}",
       "type": "image/png",
@@ -13,6 +14,7 @@
       "sizes": "512x512"
     }
   ],
+  {{- end -}}
   "start_url": "/",
   "scope": "/",
   {{- with .Site.Params.color}}

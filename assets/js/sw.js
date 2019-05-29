@@ -16,7 +16,11 @@
       /* {{ end }} /**/
       '{{$cover.Permalink}}',
       OFFLINE_URL,
-      '{{ (resources.Get "image/logo.svg" | resources.Minify).Permalink }}',
+      /* {{- if .Resources.GetMatch "image/logo.svg" -}} /**/
+      '{{ (.Resources.Get "image/logo.svg" | resources.Minify).Permalink }}',
+      /* {{- else if .Resources.GetMatch "image/logo.*" -}} /**/
+      '{{ (.Resources.GetMatch "image/logo.*").Permalink }}',
+      /* {{- end -}} /**/
       '{{"/index.json" | absURL}}'
     ];
     return caches.open(version + staticCacheName)

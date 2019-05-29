@@ -1,6 +1,7 @@
 <footer>
+    {{- if .Site.Params.Footer -}}
     <div class="items-{{len .Site.Params.Footer}} items">
-    {{- $RSS := (.OutputFormats.Get "RSS").RelPermalink -}}
+    {{- $RSS := (.OutputFormats.Get "RSS") -}}
     {{- range .Site.Params.Footer -}}
     <section>
         <h2>
@@ -72,23 +73,28 @@
                 </a>
             </li>
             {{ end }}
+            {{ with $RSS }}
             <li>
                 <h2>Updates</h2>
-                <a target="_blank" href="{{ $RSS }}" rel="noopener">
+                <a target="_blank" href="{{ .RelPermalink }}" rel="noopener">
                     {{ $icon := resources.Get "image/line-awesome/fa-rss.svg" | resources.Minify }}
                     {{ replace $icon.Content "<svg " "<svg width=\"30px\" " | safeHTML }}
                     <span>RSS Feed</span>
                 </a>
             </li>
+            {{ end }}
         </ul>
         {{ end }}
     </section>
     {{ end }}
     </div>
+    {{- end -}}
     <div id="copyright">
-        &copy; 2016 -
-        <time class="now" datetime="{{ now.Format "2006-01-02T15:04:05Z07:00" }}">{{ dateFormat "2006" now}}</time>, {{.Site.Title}}. Last Updated -
-<time datetime="{{ now.Format "2006-01-02T15:04:05Z07:00" }}">{{ dateFormat "Monday, Jan 2, 2006." now}}</time>
+        {{- replace .Site.Params.copyright "{now}" (print "<time class='now' datetime='"  (now.Format "2006-01-02T15:04:05Z07:00") "'>" (dateFormat "2006" now) "</time>")|safeHTML }} Last Updated -
+<time datetime="{{ now.Format "2006-01-02T15:04:05Z07:00" }}">{{ dateFormat "Monday, Jan 2, 2006." now}}</time> <br>
+    <!-- DO NOT REMOVE. LICENSE REQUIRES THIS ATTRIBUTION SHOULD STAY INTACT-->
+    Themed using <a href="">Eclectic</a> by <a href="https://atishay.me">Atishay</a>
+    <!-- END DO NOT REMOVE SECTION -->
     </div>
 
 </footer>

@@ -119,10 +119,12 @@
     "headline": "{{ .Title }}",
     "publisher": {
         "@type": "Organization",
+        {{- with .Resources.GetMatch "image/logo.svg" -}}
         "logo": {
             "@type": "ImageObject",
-            "url": "{{ (resources.Get "image/logo.svg" | resources.Minify).RelPermalink }}"
+            "url": "{{ (. | resources.Minify).RelPermalink }}"
         },
+        {{- end -}}
         "name": "{{ .Site.Author.name }}"
     },
     "author": {

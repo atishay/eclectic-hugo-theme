@@ -17,8 +17,13 @@
     </a>
     {{/* End Checkbox hack code. Uses the parallel <ul as well> */}}
     <a role="button" class="logo" href="{{.Site.BaseURL}}">
-        {{ $logoSVG := resources.Get "image/logo.svg" }}
-        {{ $logoSVG.Content | safeHTML }}
+        {{- if .Resources.GetMatch "image/logo.svg" -}}
+        {{ (.Resources.GetMatch "image/logo.svg").Content | safeHTML }}
+        {{- else if .Resources.GetMatch "image/logo*" -}}
+        <img height="47px" src="{{((.Resources.GetMatch "image/logo*").Resize "x47").RelPermalink}}">
+        {{- else -}}
+        {{ .Site.Title }}
+        {{- end -}}
         <span class="sr-only">Logo</span>
     </a>
     <ul role="menubar" class="top-menu">
@@ -61,6 +66,7 @@
         {{ $iconSVG.Content | safeHTML }}
     </a>
     {{ end }}
+    {{if .Site.Params.colorPickerEnabled}}
     <div id="color-picker">
         <div class="theme">
             <h3>Select Theme Color </h3>
@@ -80,6 +86,7 @@
         </div>
         {{- partialCached "util/icon" (dict "key" "gear" "size" 20 "class" "picker" ) "gear-20" -}}
     </div>
+    {{ end }}
 </header>
 </div>
 {{/* https://css-tricks.com/markup-for-breadcrumbs/

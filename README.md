@@ -5,6 +5,8 @@ A theme for high performance customizable hugo websites.
 
 ![Eclectic Theme](theme.jpg?raw=true "Eclectic Theme")
 
+    NOTE: REQUIRES ATTRIBUTION IN FOOTER TO STAY INTACT FOR USAGE.
+
 ## Layout Types
 
 * `Default` No neeed to enter the type parameter. Default is a blog post.
@@ -14,7 +16,7 @@ A theme for high performance customizable hugo websites.
 ## Images
 * `assets/image/favicon.png` - Favicon PNG Version
 * `assets/image/favicon.svg` - Favicon SVG Version
-* `assets/image/logo.svg` - Logo (130x47)
+* `assets/image/logo.svg` or `assets/image/logo.*` - Logo
 
 ## Menus
 
@@ -59,6 +61,7 @@ CSS Grids are used for column arrangements in the most logical manner.
 
 ## Settings
 * `Site.Params.CSP` Set true to enable CSP. *Please test with production environment flag with this*. In production prevents live reload.
+* `Site.Params.colorPickerEnabled` Enable color picker to help the user switch color themes as well as dark mode.
 * `Site.Params._topSubMenu` Setting to optimize the header generation speed. If the top menu has no submenu, set this to false.
 * `Site.Params.custom_css` - Custom CSS File for overrides.
 * `Site.Params.github` - Github link for the octocat on top right.

@@ -1,6 +1,6 @@
 /*
   Hello
-  {{- $color := (int (print "0x" ($.Site.Params.color | strings.TrimLeft "#"))) -}}
+  {{- $color := (int (print "0x" ($.Site.Params.color | default "#f92b3f" | strings.TrimLeft "#"))) -}}
   {{- $b := mod $color 256 -}}
   {{- $color = sub $color $b -}}
   {{- $color = div $color 256 -}}
