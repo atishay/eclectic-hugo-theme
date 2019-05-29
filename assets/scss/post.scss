@@ -1,41 +1,5 @@
 @import "triangle.scss";
 
-// @mixin post-header ($height) {
-    // $left-detach: 12px;
-    // position: absolute;
-    // display: inline-flex;
-    // align-items: center;
-    // justify-content: center;
-    // padding: $height/3;
-    // bottom: $height/3 + 20px;
-    // // box-shadow: 2px 0px 10px #000;
-    // filter: drop-shadow(3px 3px 8px rgba(0, 0, 0, 1));
-
-    // text-shadow: 0 1px 2px #000;
-    // font-size: $height/3;
-    // &:before,
-    // &:after {
-    //     content: "";
-    //     position: absolute;
-    // }
-
-    // height: $height;
-    // background: var(--theme-color);
-    // color: #fff;
-    // left: -$left-detach;
-    // &:before {
-    //     @include triangle($left-detach, #000, down-right);
-    //     top: -$left-detach;
-    //     left: 0;
-    // }
-
-    // &:after {
-    //     @include triangle($height ($height/3), var(--theme-color), right);
-    //     right: ceil(-$height/3);
-    //     top: 0;
-    // }
-// }
-
 .post {
     z-index: 1;
     margin: calc(var(--header-height)/2);
@@ -58,10 +22,6 @@
             border:0;
         }
     }
-    // .guitar {
-    //     width: 100%;
-    // }
-    // box-shadow: 0 0 2px #aaa;
     .i-tex {
         transform: scale(0.8);
     }
@@ -139,22 +99,6 @@
             height: 100%;
             position: absolute;
         }
-        // h1 {
-        //     @include media('>=xs') {
-        //         @include post-header(60px);
-        //     }
-
-        //     @include media('>=lg') {
-        //         @include post-header(80px);
-        //     }
-
-        //     @include media('>=xl') {
-        //         @include post-header(100px);
-        //     }
-        // }
-        // h1::selection {
-        //     text-shadow: 0 1px 2px #000;
-        // }
     }
     aside {
         @include media(">=lg") {
