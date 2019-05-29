@@ -7,6 +7,8 @@ A theme for high performance customizable hugo websites.
 
     NOTE: REQUIRES ATTRIBUTION IN FOOTER TO STAY INTACT FOR USAGE.
 
+See [atishay.me](https://github.com/atishay/atishay.github.io) for sample website.
+
 ## Layout Types
 
 * `default` No neeed to enter the type parameter. Default is a blog post.
