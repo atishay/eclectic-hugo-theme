@@ -16,10 +16,10 @@
       /* {{ end }} /**/
       '{{$cover.Permalink}}',
       OFFLINE_URL,
-      /* {{- if .Resources.GetMatch "image/logo.svg" -}} /**/
-      '{{ (.Resources.Get "image/logo.svg" | resources.Minify).Permalink }}',
-      /* {{- else if .Resources.GetMatch "image/logo.*" -}} /**/
-      '{{ (.Resources.GetMatch "image/logo.*").Permalink }}',
+      /* {{- if (fileExists "assets/image/logo.svg") -}} /**/
+      '{{ (resources.Get "image/logo.svg" | resources.Minify).Permalink }}',
+      /* {{- else if (fileExists "assets/image/logo.png") -}} /**/
+      '{{ (resources.Get "image/logo.png").Permalink }}',
       /* {{- end -}} /**/
       '{{"/index.json" | absURL}}'
     ];
