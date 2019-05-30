@@ -17,10 +17,10 @@
     </a>
     {{/* End Checkbox hack code. Uses the parallel <ul as well> */}}
     <a role="button" class="logo" href="{{.Site.BaseURL}}">
-        {{- if .Resources.GetMatch "image/logo.svg" -}}
-        {{ (.Resources.GetMatch "image/logo.svg").Content | safeHTML }}
-        {{- else if .Resources.GetMatch "image/logo*" -}}
-        <img height="47px" src="{{((.Resources.GetMatch "image/logo*").Resize "x47").RelPermalink}}">
+        {{- if (fileExists "assets/image/logo.svg") }}
+        {{ (resources.Get "image/logo.svg").Content | safeHTML }}
+        {{- else if (fileExists "assets/image/logo.png") -}}
+        <img height="47px" src="{{((resources.Get "image/logo.png").Resize "x47").RelPermalink}}">
         {{- else -}}
         {{ .Site.Title }}
         {{- end -}}

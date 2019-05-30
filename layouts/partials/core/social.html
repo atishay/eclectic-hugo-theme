@@ -119,10 +119,15 @@
     "headline": "{{ .Title }}",
     "publisher": {
         "@type": "Organization",
-        {{- with .Resources.GetMatch "image/logo.svg" -}}
+        {{- if (fileExists "assets/image/logo.svg") }}
         "logo": {
             "@type": "ImageObject",
-            "url": "{{ (. | resources.Minify).RelPermalink }}"
+            "url": "{{ (resources.Get "image/logo.svg" | resources.Minify).RelPermalink }}"
+        },
+        {{- else if (fileExists "assets/image/logo.png") }}
+        "logo": {
+        "@type": "ImageObject",
+        "url": "{{ (resources.Get "image/logo.png" | resources.Minify).RelPermalink }}"
         },
         {{- end -}}
         "name": "{{ .Site.Author.name }}"

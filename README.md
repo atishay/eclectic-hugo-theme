@@ -18,8 +18,8 @@ See [atishay.me](https://github.com/atishay/atishay.github.io) for sample websit
 * `meta` Special page type for having sections and nested content. Used to create the home page. See metapages below for usage.
 
 ## Images
-* `assets/image/favicon.png` - Favicon PNG Version
 * `assets/image/favicon.svg` - Favicon SVG Version
+* `assets/image/favicon.png` - Favicon PNG Version
 * `assets/image/logo.svg` or `assets/image/logo.*` - Logo
 
 ## Menus
@@ -64,9 +64,9 @@ CSS Grids are used for column arrangements in the most logical manner.
 8 and 9 can be further improved if needed.
 
 ## Settings
+
 * `Site.Params.CSP` Set true to enable CSP. *Please test with production environment flag with this*. In production prevents live reload.
 * `Site.Params.colorPickerEnabled` Enable color picker to help the user switch color themes as well as dark mode.
-* `Site.Params._topSubMenu` Setting to optimize the header generation speed. If the top menu has no submenu, set this to false.
 * `Site.Params.custom_css` - Custom CSS File for overrides.
 * `Site.Params.github` - Github link for the octocat on top right.
 * `Site.Params.custom_css` - Custom CSS Overrides file.

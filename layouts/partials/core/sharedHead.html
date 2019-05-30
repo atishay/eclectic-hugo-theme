@@ -11,14 +11,15 @@
 {{- end -}}
 
 {{- block "favicon" . }}
-{{- with .Resources.GetMatch "image/favicon.svg" -}}
-  {{- $iconSVG := . | resources.Minify }}
+{{- if (fileExists "assets/image/favicon.svg") }}
+  {{- $iconSVG := resources.Get "image/favicon.svg" | resources.Minify }}
   <link rel="icon" type="image/svg" href="{{ $iconSVG.RelPermalink }}" />
 {{- end -}}
 
-{{- with .Resources.GetMatch "image/favicon.png" -}}
-  <link rel="apple-touch-icon-precomposed" href="{{ (.Resize " 180x180 ").RelPermalink }}" />
-  <link rel="icon" type="image/png" href="{{ (.Resize " 196x196 ").RelPermalink }}" />
+{{- if (fileExists "assets/image/favicon.png") }}
+{{- $icon := resources.Get "image/favicon.png" -}}
+  <link rel="apple-touch-icon-precomposed" href="{{ ($icon.Resize " 180x180 ").RelPermalink }}" />
+  <link rel="icon" type="image/png" href="{{ ($icon.Resize " 196x196 ").RelPermalink }}" />
   {{- end -}}
 {{- end -}}
 {{- $title := .Site.Title -}}
