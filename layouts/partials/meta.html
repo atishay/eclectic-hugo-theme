@@ -111,3 +111,8 @@ style="background-image:url({{$bg.Permalink}})"
 {{- end }}
 </section>
 {{- end -}}
+{{- if (or (not .Params.Content) .Content) -}}
+<article class="simple">
+    {{- .Content | markdownify -}}
+</article>
+{{- end -}}

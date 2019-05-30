@@ -52,7 +52,9 @@
   if(window.localStorage.dark === "true") {
     document.documentElement.classList.add("dark");
   }
+  {{- if (site.Params.checksDarkMode) -}}
   if (window.matchMedia('(prefers-color-scheme: dark)').matches && window.localStorage.dark !== "false") {
     document.documentElement.classList.add("dark");
   }
+  {{- end -}}
 </script>

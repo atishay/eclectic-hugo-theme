@@ -30,7 +30,7 @@
 {{ $currentPage := . }}
 {{/* Finding the best category to pin the current page to. */}}
 {{ $fallback := "home" }}
-{{ range .Site.Menus.top }}
+{{ range .Site.Menus.main }}
 {{ if or ($currentPage.HasMenuCurrent "top" .) ($currentPage.IsMenuCurrent "top" .) }}
 {{$fallback = .Name}}
 {{else if eq $currentPage.Section .Name}}
@@ -38,14 +38,14 @@
 {{end}}
 {{ end}}
 {{/* Current Category is now found. We just need to fit inside it */}}
-{{ range .Site.Menus.top }}
+{{ range .Site.Menus.main }}
 <li role="menuitem" class="top-menu-item {{ if eq $fallback .Name }}active{{ end }}">
-            <a href="{{.URL}}">{{ .Title | upper }}</a>
+            <a href="{{.URL}}">{{ .Name | upper }}</a>
             {{ if .HasChildren }}
                 <ul class="sub-menu" role="menu">
 {{ range .Children }}
                 <li class="{{ if $currentPage.IsMenuCurrent "top" . }}active{{ end }}">
-                    <a href="{{ .URL }}">{{ .Title | upper }}</a>
+                    <a href="{{ .URL }}">{{ .Name | upper }}</a>
                 </li>
 {{ end }}
                 </ul>
