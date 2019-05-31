@@ -220,6 +220,55 @@
     }
 }
 
+///////////////////////////////////////
+// Full page Content Section
+///////////////////////////////////////
+
+.meta.content {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: auto;
+    &:not(:first-of-type) {
+        flex: 0;
+    }
+    &>article {
+        @include container-margin;
+        padding: calc(2*var(--content-padding));
+        background: rgba(var(--background-color-rgb), 0.9);
+        border-radius: 5px;
+
+        box-shadow: 0 0 2px #ddd;
+        &:hover {
+            background: var(--background-color);
+        }
+    }
+
+    @include media(">md") {
+        &>article {
+
+            * {
+                animation: fade-up-item-3 $load-up-duration ease-in-out;
+            }
+
+            h1 {
+                animation: fade-up-item-1 $load-up-duration ease-in-out;
+            }
+
+            .subtitle {
+                animation: fade-up-item-2 $load-up-duration ease-in-out;
+            }
+        }
+    }
+
+    @media (prefers-reduced-motion) {
+        &>article * {
+            animation: none !important;
+        }
+    }
+}
+
+
 //////////////////////////////////////////
 // Full Width for bigger content
 //////////////////////////////////////////

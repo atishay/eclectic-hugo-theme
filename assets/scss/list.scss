@@ -1,15 +1,14 @@
 /**
- * Specific types for page type simple and list.
+ * Specific types for page type list.
  **/
 .list,
-.simple,
 .terms,
 .page404 {
     z-index: 1;
     margin: calc(var(--header-height)/2);
     @include container-margin;
     padding: calc(2*var(--content-padding));
-    background: rgba(var(--text-color), 0.1);
+    background: rgba(var(--background-color-rgb), 0.9);
     border-radius: 5px;
 
     // box-shadow: 0 0 2px #aaa;
@@ -29,7 +28,7 @@
 }
 
 .terms {
-    background: rgba(var(--text-color), 0.1);
+    background: rgba(var(--background-color-rgb), 0.9);
 
     &:hover {
         background: var(--background-color);
@@ -246,32 +245,5 @@
                 opacity: 1;
             }
         }
-    }
-}
-
-/////////////////////////////////////////
-// Animations
-/////////////////////////////////////////
-
-@include media(">md") {
-    .simple {
-
-        * {
-            animation: fade-up-item-3 $load-up-duration ease-in-out;
-        }
-
-        h1 {
-            animation: fade-up-item-1 $load-up-duration ease-in-out;
-        }
-
-        .subtitle {
-            animation: fade-up-item-2 $load-up-duration ease-in-out;
-        }
-    }
-}
-
-@media (prefers-reduced-motion) {
-    .simple * {
-        animation: none !important;
     }
 }

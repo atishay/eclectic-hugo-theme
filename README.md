@@ -11,11 +11,9 @@ See [atishay.me](https://github.com/atishay/atishay.github.io) for sample websit
 
 ## Layout Types
 
-* `default` No neeed to enter the type parameter. Default is a blog post.
-* `simple` Used for pages where the content does not have a sidebar, just header, rendered markdown and footer. Supported front matter additions
-  * `subtitle` For subtitle.
+* `default` Pages with simple markdown content. Support structured metadata described below.
+* `post` Used for pages where the content has a sidebar, a cover image etc.
 * `contact` Used for Contact Us pages.
-* `meta` Special page type for having sections and nested content. Used to create the home page. See metapages below for usage.
 
 ## Images
 * `assets/image/favicon.svg` - Favicon SVG Version
@@ -98,8 +96,10 @@ CSS Grids are used for column arrangements in the most logical manner.
 * `tex` Renders Latex as SVG. Optional parameter `inline` for inline latex. Needs `Site.Params.Tex` for the `tex2svg` hosting.
 * `guitar` Renders guitar tabs and chords using jtab. Needs `Site.Params.Guitar` for the `guitar2svg` hosting.
 
-## Metapages
-Metapages are pages built using structured data and provide advanced styling and grouping into columns, support for carousels, lists etc. In the front matter for a meta page, you can supply the following information to render structured data:
+## Structured metadata
+
+You can supplied structured metadata in a default page. These pages provide multiple sections with advanced styling and grouping into columns, support for carousels, lists etc. In the front matter, you can supply the following information a list in the `content` to render structured data:
+
 * `title` The title of the section
 * `subtitle` Section's subtitle
 * `image` Top level image for the section:
@@ -134,3 +134,4 @@ Metapages are pages built using structured data and provide advanced styling and
   * `blog` to show recent blog entries. Has additional parameters `count` which is the number of blog items and `section` which is the name of the section to get recent posts from.
   * `carousel` Provides support for running a carousel of content.
   * `centered` Provides content centered on the page behind the background image supplied as `background`
+  * `content` Renders the content of the page's markdown content outside of the params. If not provided, page's markdown is rendered at the bottom and honors the page's title and subtitle properties.

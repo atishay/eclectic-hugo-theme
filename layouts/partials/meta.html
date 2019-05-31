@@ -1,5 +1,8 @@
-{{$site := .Site}}
+{{- $site := .Site}}
+{{$top := . }}
+{{$needsContentRender := true }}
 {{- range .Params.content -}}
+{{ $types := split .type " " }}
 <section {{with .title}}id="{{. | urlize}}"{{ end }} class="meta {{.type | default "default"}}"
 {{- with.background -}}
 {{ $bg := (resources.Get .).Fill "1400x940" }}
@@ -19,7 +22,10 @@ style="background-image:url({{$bg.Permalink}})"
     {{with .title}}<h1>{{. | markdownify}}</h1>{{ end }}
     {{with .subtitle}}<p class="subtitle">{{. | markdownify}}</p>{{ end }}
     {{with .content}}<p>{{. | markdownify}}</p>{{ end }}
-    {{ $types := split .type " " }}
+    {{- if in $types "content" -}}
+    {{ $needsContentRender = false }}
+    {{- $top.Content -}}
+    {{- end -}}
     {{- if in $types "blog" -}}
     <ul class="items items-{{.count | default 6}}">
         {{- range first (default 6 .count) (where (where $site.Pages ".Section" .section) ".Kind" "page" ) -}}
@@ -111,8 +117,15 @@ style="background-image:url({{$bg.Permalink}})"
 {{- end }}
 </section>
 {{- end -}}
-{{- if (or (not .Params.Content) .Content) -}}
-<article class="simple">
-    {{- .Content | markdownify -}}
-</article>
+{{- if (and (or (not .Params.Content) .Content) $needsContentRender) -}}
+    {{ $cover := (resources.Get "image/desktop.jpg").Fill "1400x787" }}
+    <section class="meta content" style="background-image:url({{$cover.Permalink}})">
+        <article>
+            {{with .Title}}<h1 class='title'>{{.}}</h1>{{end}}
+            {{- with .Params.subtitle }}
+            <span class='subtitle'>{{.}}</span>
+            {{- end -}}
+            {{- .Content }}
+        </article>
+    </section>
 {{- end -}}
