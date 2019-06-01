@@ -118,8 +118,7 @@ style="background-image:url({{$bg.Permalink}})"
 </section>
 {{- end -}}
 {{- if (and (or (not .Params.Content) .Content) $needsContentRender) -}}
-    {{ $cover := (resources.Get "image/desktop.jpg").Fill "1400x787" }}
-    <section class="meta content" style="background-image:url({{$cover.Permalink}})">
+    <section class="meta content with-background">
         <article>
             {{with .Title}}<h1 class='title'>{{.}}</h1>{{end}}
             {{- with .Params.subtitle }}

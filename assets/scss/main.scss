@@ -7,8 +7,8 @@
   {{- $g := mod $color 256 -}}
   {{- $color = sub $color $g -}}
   {{- $r := div $color 256 -}}
-  {{ $cover := (resources.Get "image/desktop.jpg").Fill "1400x787" }}
-  {{ $coverDark := (resources.Get "image/desktop-dark.jpg").Fill "1400x787" }}
+  {{- $cover := partial "util/backgroundImage.html" . -}}
+  {{- $coverDark := partial "util/backgroundImageDark.html" . -}}
 */
 $cover: "{{$cover.Permalink}}";
 $coverDark: "{{$coverDark.Permalink}}";

@@ -6,7 +6,8 @@
   const OFFLINE_URL = '{{"/off/" | absURL }}';
 
   // Store core files in a cache (including a page to display when offline)
-  // {{- $cover:= (resources.Get "image/desktop.jpg").Fill "1400x787" }}
+  //  {{- $cover := partial "util/backgroundImage.html" . -}}
+  // {{- $coverDark := partial "util/backgroundImageDark.html" . -}}
   function updateStaticCache() {
     const urls = [
       '{{"/" | absURL}}',
@@ -15,6 +16,7 @@
       '{{.}}',
       /* {{ end }} /**/
       '{{$cover.Permalink}}',
+      '{{$coverDark.Permalink}}',
       OFFLINE_URL,
       /* {{- if (fileExists "assets/image/logo.svg") -}} /**/
       '{{ (resources.Get "image/logo.svg" | resources.Minify).Permalink }}',

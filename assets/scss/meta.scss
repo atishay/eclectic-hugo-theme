@@ -224,11 +224,18 @@
 // Full page Content Section
 ///////////////////////////////////////
 
+.dark .meta.content.with-background {
+    background-image: url($coverDark);
+}
+
 .meta.content {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     height: auto;
+    &.with-background {
+        background-image: url($cover);
+    }
     &:not(:first-of-type) {
         flex: 0;
     }
