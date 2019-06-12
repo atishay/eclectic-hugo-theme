@@ -239,6 +239,15 @@
     &:not(:first-of-type) {
         flex: 0;
     }
+    h1,
+    h2,
+    h3,
+    h4 {
+        text-align: left;
+    }
+    h1:first-of-type {
+        text-align: center;
+    }
     &>article {
         @include container-margin;
         padding: calc(2*var(--content-padding));
