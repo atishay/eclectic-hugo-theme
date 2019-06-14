@@ -189,11 +189,44 @@ table::-webkit-resizer {
     background-color: #666;
 }
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+
+    thead {
+        background-color: rgba(var(--theme-color-rgb), 0.3);
+    }
+
+    tr:nth-child(even) {
+        background-color: rgba(var(--theme-color-rgb), 0.1);
+    }
+    td, th {
+        padding: 4px;
+    }
+    border-bottom: 1px solid rgba(var(--theme-color-rgb), 0.3);
+}
+
 .highlight {
     // Needed to prevent rendering artifacts in safari.
     padding-bottom: 3px;
     background-color: #272822;
     margin-bottom: 20px;
+    table {
+          border-collapse: unset;
+          width: auto;
+        tr:nth-child(even) {
+            background-color: transparent;
+        }
+        thead {
+            background-color: transparent;
+        }
+        td,
+        th {
+            padding: 0;
+        }
+        border-bottom: none;
+    }
 }
 
 button, .button, .button-small {
