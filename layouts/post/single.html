@@ -6,9 +6,11 @@
 {{- partialCached "util/background.html" "bg" -}}
 <div class="post">
 <main>
+{{- if $.Page.Resources.GetMatch "cover.*" -}}
 <div class="post-anchor">
 {{- partial "util/cover.html" (dict "class" "banner-holder" "page" . "width" 800 "height" 400) -}}
 </div>
+{{- end -}}
 <h1>{{.Title}}</h1>
 {{- partial "util/heading-anchors.html" .Content -}}
 {{- $title := default .Title "" -}}

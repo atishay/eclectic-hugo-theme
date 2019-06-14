@@ -35,7 +35,7 @@
     {{ .Scratch.Add "Related" ($after | first 2) }}
   {{- end -}}
 {{- else -}}
-{{ .Scratch.Set "Related" (.Site.RegularPages.RelatedIndices . "tags" "date" "categories" | first 3) }}
+  {{ .Scratch.Set "Related" (.Site.RegularPages.Related . | first 3) }}
 {{- end -}}
 
 

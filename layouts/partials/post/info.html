@@ -13,7 +13,11 @@
         <span>Published</span>
       </th>
       <td>
-        <time datetime="{{ .PublishDate.Format " 2006-01-02T15:04:05Z07:00 " }}">{{ .PublishDate.Format "Monday, Jan 2, 2006."}}</time>
+        {{- $date := .PublishDate -}}
+        {{- if not $date -}} 
+        {{- $date = .Lastmod -}}
+        {{- end -}}
+        <time datetime="{{ $date.Format " 2006-01-02T15:04:05Z07:00 " }}">{{ $date.Format "Monday, Jan 2, 2006."}}</time>
       </td>
     </tr>
     <tr>
