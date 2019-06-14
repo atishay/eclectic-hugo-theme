@@ -190,6 +190,17 @@ table::-webkit-resizer {
 }
 }
 
+dt {
+    font-weight: 600;
+    padding: 5px;
+    margin: 0 0 5px;
+    background-color: rgba(var(--theme-color-rgb), 0.1);
+}
+
+dd {
+    margin-left: 80px;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
