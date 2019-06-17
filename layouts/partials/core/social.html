@@ -5,9 +5,7 @@
 {{- with .Site.Author.name}}
 <meta name="author" content="{{ . }}">
 {{- end -}}
-{{- $manifest := resources.Get "json/manifest.json" -}}
-{{- $manifest = $manifest | resources.ExecuteAsTemplate "manifest.json" . }}
-<link rel="manifest" href="{{$manifest.RelPermalink}}">
+{{- partialCached "core/manifest.html" . -}}
 {{ end }}
 
 {{- block "opengraph" . -}}
