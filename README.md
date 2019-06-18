@@ -18,7 +18,7 @@ See [atishay.me](https://github.com/atishay/atishay.github.io) for sample websit
 ## Images
 * `assets/image/favicon.svg` - Favicon SVG Version
 * `assets/image/favicon.png` - Favicon PNG Version
-* `assets/image/logo.svg` or `assets/image/logo.*` - Logo
+* `assets/image/logo.svg` or `assets/image/logo.png` - Logo
 
 ## Menus
 

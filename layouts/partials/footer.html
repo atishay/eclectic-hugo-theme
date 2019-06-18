@@ -90,7 +90,7 @@
     </div>
     {{- end -}}
     <div id="copyright">
-        {{- replace .Site.Params.copyright "{now}" (print "<time class='now' datetime='"  (now.Format "2006-01-02T15:04:05Z07:00") "'>" (dateFormat "2006" now) "</time>")|safeHTML }} Last Updated -
+        {{- replace .Site.Params.copyright "{now}" (print "<time class='now' datetime='"  (now.Format "2006-01-02T15:04:05Z07:00") "'>" (dateFormat "2006" now) "</time>")| markdownify | safeHTML }} Last Updated -
 <time datetime="{{ now.Format "2006-01-02T15:04:05Z07:00" }}">{{ dateFormat "Monday, Jan 2, 2006." now}}</time> <br>
     <!-- DO NOT REMOVE. LICENSE REQUIRES THIS ATTRIBUTION SHOULD STAY INTACT-->
     Themed using <a href="">Eclectic</a> by <a href="https://atishay.me">Atishay</a>

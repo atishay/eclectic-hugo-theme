@@ -125,7 +125,7 @@
         {{- else if (fileExists "assets/image/logo.png") }}
         "logo": {
         "@type": "ImageObject",
-        "url": "{{ (resources.Get "image/logo.png" | resources.Minify).RelPermalink }}"
+        "url": "{{ (resources.Get "image/logo.png" ).RelPermalink }}"
         },
         {{- end -}}
         "name": "{{ .Site.Author.name }}"
