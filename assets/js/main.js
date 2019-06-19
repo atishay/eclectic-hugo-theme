@@ -187,9 +187,12 @@
     };
     checkbox.addEventListener("change", handler);
   }
+
   ///////////////////////////////////////////
   // Search
   ///////////////////////////////////////////
+  // {{- with .Site.Home.OutputFormats.Get "JSON" }}
+
   class Search {
     constructor() {
       // Ignore errors loading search.
@@ -367,7 +370,7 @@
   }
 
   const search = new Search();
-
+  // {{ end }}
   ///////////////////////////////////////////
   // Service Worker
   ///////////////////////////////////////////

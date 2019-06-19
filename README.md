@@ -20,6 +20,22 @@ See [atishay.me](https://github.com/atishay/atishay.github.io) for sample websit
 * `assets/image/favicon.png` - Favicon PNG Version
 * `assets/image/logo.svg` or `assets/image/logo.png` - Logo
 
+## Search
+* The theme creates a JSON of the entire website in the home pages's index.json which is used for search.
+* To get the search functionality, add the json output format to the home page.
+
+```
+[outputs]
+  home = [
+   "html",
+   "rss",
+   "json"
+  ]
+```
+
+## Series
+If `series` taxonomy is used, pages from the same series are shown in the related pages before using any other related pages.
+
 ## Menus
 
 * `top` - Top menu shown in the header. Supports one nested level of submenus. Uses the Section name to find the appropriate top level item to highlight.

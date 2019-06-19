@@ -120,12 +120,12 @@
         {{- if (fileExists "assets/image/logo.svg") }}
         "logo": {
             "@type": "ImageObject",
-            "url": "{{ (resources.Get "image/logo.svg" | resources.Minify).RelPermalink }}"
+            "url": {{ (resources.Get "image/logo.svg" | resources.Minify).RelPermalink | jsonify | safeJS}}
         },
         {{- else if (fileExists "assets/image/logo.png") }}
         "logo": {
         "@type": "ImageObject",
-        "url": "{{ (resources.Get "image/logo.png" ).RelPermalink }}"
+        "url": {{ (resources.Get "image/logo.png" ).RelPermalink | jsonify | safeJS }}
         },
         {{- end -}}
         "name": "{{ .Site.Author.name }}"
@@ -156,19 +156,19 @@
 {{ end }}
 {{- if .IsPage }}
 {{- if not .PublishDate.IsZero }}
-    "dateCreated": "{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+    "dateCreated": {{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | jsonify | safeJS }},
 {{- else if not .Date.IsZero }}
-    "datePublished": "{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+    "datePublished": {{ .Date.Format "2006-01-02T15:04:05-07:00" | jsonify | safeJS }},
 {{- end }}
 {{- if not .Lastmod.IsZero }}
-    "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+    "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | jsonify | safeJS }},
 {{ end }}
 {{- else }}
 {{- if not .Date.IsZero }}
-    "dateModified": "{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+    "dateModified": {{ .Date.Format "2006-01-02T15:04:05-07:00" | jsonify | safeJS }},
 {{- end }}
 {{- end }}
-    "url": "{{.Permalink}}"
+    "url": {{.Permalink | jsonify | safeJS}}
 }
 </script>
 
