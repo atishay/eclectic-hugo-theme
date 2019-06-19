@@ -141,8 +141,8 @@
 {{ else if eq .Page.Kind "section"}}
     "@type": "Blog",
     "mainEntityOfPage":{"@type":"WebPage","@id":"{{.Permalink}}"},
-{{ else if (and (eq .Page.Kind "page") (eq .Section "blog") ) }}
-    "@type": "BlogPosting",
+{{ else if (and (eq .Page.Kind "page") (ne .Section "") ) }}
+    "@type": "BlogPosting{{.Section}}",
     "wordCount": {{.WordCount}},
     "mainEntityOfPage":{"@type":"WebPage","@id":"{{.Permalink}}"},
 {{ else }}

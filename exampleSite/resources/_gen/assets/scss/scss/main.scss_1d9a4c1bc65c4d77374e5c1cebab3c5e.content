@@ -364,19 +364,19 @@ button, .button, .button-small {
     .items-5 > *:nth-child(5) {
       grid-area: five; } }
 
-.items-12 {
+.items-12, .items-10, .items-11, .items-13, .items-14 {
   display: grid;
   grid-template-columns: 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 20px; }
   @media (min-width: 768px) {
-    .items-12 {
+    .items-12, .items-10, .items-11, .items-13, .items-14 {
       grid-template-columns: 1fr 1fr; } }
   @media (min-width: 992px) {
-    .items-12 {
+    .items-12, .items-10, .items-11, .items-13, .items-14 {
       grid-template-columns: 1fr 1fr 1fr; } }
   @media (min-width: 1200px) {
-    .items-12 {
+    .items-12, .items-10, .items-11, .items-13, .items-14 {
       grid-template-columns: 1fr 1fr 1fr 1fr; } }
 
 .items-4,

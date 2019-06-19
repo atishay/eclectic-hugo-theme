@@ -23,7 +23,7 @@
         {{ end }}
         {{ with .recents }}
         <ul>
-            {{ range first ($count) (where (where $.Site.Pages "Section" "blog") ".Kind" "==" "page" )}}
+            {{ range first ($count) (where (where $.Site.Pages "Section" .) ".Kind" "==" "page" )}}
             <li>
                 <a href={{.Permalink}}>{{ .Title }}</a> -
 <time datetime="{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}">{{ .PublishDate.Format "Monday, Jan 2, 2006."}}</time>
