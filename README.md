@@ -9,6 +9,17 @@ A theme for high performance customizable hugo websites.
 
 See [atishay.me](https://github.com/atishay/atishay.github.io) for sample website.
 
+## Key Features:
+* Fast
+* Millions of color themes with CSS Variables
+* Color switcher to allow users to customize the color theme.
+* Dark mode support.
+* Structured metadata support for adding advanced content to any page (not just home page).
+* Configurable footer.
+* Search support (no external dependencies).
+* Full SEO with JSON-LD, twitter cards and open graph.
+* CSS Grid based powerful grid system.
+
 ## Layout Types
 
 * `default` Pages with simple markdown content. Support structured metadata described below.
@@ -95,11 +106,11 @@ CSS Grids are used for column arrangements in the most logical manner.
 
 ## Browsers
 
-* This theme uses all modern CSS like CSS Variables, CSS Grid and flexbox. Do not expect this to support older browsers.
+* This theme uses all modern CSS like CSS Variables, CSS Grid and Flexbox. Do not expect this to support older browsers.
 
 ## Posts
 
-* Use Hugo Page Bundles for posts. The theme expects each page to have a beautiful image.
+* Use Hugo Page Bundles for posts. The theme automatically picks up `cover.jpg` in the page bundle as the cover image.
 
 ## Top Matter
 
@@ -151,3 +162,5 @@ You can supplied structured metadata in a default page. These pages provide mult
   * `carousel` Provides support for running a carousel of content.
   * `centered` Provides content centered on the page behind the background image supplied as `background`
   * `content` Renders the content of the page's markdown content outside of the params. If not provided, page's markdown is rendered at the bottom and honors the page's title and subtitle properties.
+
+NOTE: Almost all the properties are optional. The theme is usable without providing any of the config properties.

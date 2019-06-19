@@ -21,7 +21,7 @@ category = "categories"
 tag = "tags"
 series = "series"
 
-# Privacy config for Hugo's internal templates (optional)
+# Privacy config for Hugo's internal templates
 [privacy]
 
 [privacy.vimeo]
