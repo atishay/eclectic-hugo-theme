@@ -22,6 +22,7 @@ tag = "tags"
 series = "series"
 
 # Privacy config for Hugo's internal templates
+# Not specific to eclectic.
 [privacy]
 
 [privacy.vimeo]

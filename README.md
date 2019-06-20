@@ -3,7 +3,7 @@ Eclectic
 
 A theme for high performance customizable hugo websites.
 
-![Eclectic Theme](theme.jpg?raw=true "Eclectic Theme")
+![Eclectic Theme](exampleSite/assets/theme.jpg?raw=true "Eclectic Theme")
 
     NOTE: REQUIRES ATTRIBUTION IN FOOTER TO STAY INTACT FOR USAGE.
 
@@ -119,7 +119,7 @@ CSS Grids are used for column arrangements in the most logical manner.
 
 ## Shortcodes
 
-* `fig` Same as `figure`, but added support for responsive resizing of images.
+* `fig` Same as `figure`, but added support for providing image size.
 * `tex` Renders Latex as SVG. Optional parameter `inline` for inline latex. Needs `Site.Params.Tex` for the `tex2svg` hosting.
 * `guitar` Renders guitar tabs and chords using jtab. Needs `Site.Params.Guitar` for the `guitar2svg` hosting.
 
