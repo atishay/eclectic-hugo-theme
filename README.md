@@ -164,3 +164,9 @@ You can supplied structured metadata in a default page. These pages provide mult
   * `content` Renders the content of the page's markdown content outside of the params. If not provided, page's markdown is rendered at the bottom and honors the page's title and subtitle properties.
 
 NOTE: Almost all the properties are optional. The theme is usable without providing any of the config properties.
+
+## Credits
+`Ecelectic` is a collection of some of the best work in Hugo. It incorporates many of great components that the Hugo community provides. Here are some of them:
+* Hugo debug bar: https://github.com/JugglerX/hugo-debug-bar
+* Hugo tag cloud: https://www.sidorenko.io/post/2017/07/nice-tagcloud-with-hugo/
+* Series in Hugo: https://discourse.gohugo.io/t/previous-in-series-and-next-in-series-links/2654/6
