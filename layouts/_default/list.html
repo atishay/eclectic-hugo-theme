@@ -2,7 +2,8 @@
 {{- partialCached "util/background.html" "bg" -}}
 <article class="list">
     <h1 class='title'>{{.Title}}</h1>
-<span class='subtitle'>{{- .Content | plainify -}}</span>
+    <span class='subtitle'>{{.Params.Subtitle}}</span>
+    {{- .Content -}}
 <ul class="blog-posts items-{{.Paginator.PageSize}}">
     {{ range where .Paginator.Pages "Section" .Section}}
 {{- partialCached "util/post.html" . .RelPermalink -}}
