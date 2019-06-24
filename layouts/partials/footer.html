@@ -23,8 +23,8 @@
         {{ end }}
         {{- if .menu -}}
         <ul class="sidebar-nav">
-            {{ range .Site.Menus.footer }}
-            <li><a class="footer-menu" href="{{ .URL }}" title="{{ .Title }}">{{ .Name }}</a></li>
+            {{ range $.Site.Menus.footer }}
+            <li><a class="footer-menu" href="{{ .URL }}" title="{{ .Title }}">{{ default .Page.Title .Name }}</a></li>
             {{ end }}
         </ul>
 
