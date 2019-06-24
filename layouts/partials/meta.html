@@ -5,7 +5,7 @@
 {{ $types := split .type " " }}
 <section {{with .title}}id="{{. | urlize}}"{{ end }} class="meta {{.type | default "default"}}"
 {{- with.background -}}
-{{ $bg := (resources.Get .).Fill "1400x940" }}
+{{ $bg := (partial "util/image.html"  (dict "Page" $top "image" .)).Fill "1400x940" }}
 style="background-image:url({{$bg.Permalink}})"
 {{- end -}}
 >
@@ -16,7 +16,7 @@ style="background-image:url({{$bg.Permalink}})"
     {{- end -}}
     {{- with .image -}}
     {{$anchor := .anchor | default "" }}
-    {{ $cover := (resources.Get .href).Fill (print (mul .width 2) "x" (mul .height 2) " " $anchor) }}
+    {{ $cover := (partial "util/image.html"  (dict "Page" $top "image" .href)).Fill (print (mul .width 2) "x" (mul .height 2) " " $anchor) }}
     <img intrinsicsize="{{print (mul .width 2) "x" (mul .height 2)}}" width="{{.width}}" height="{{.height}}" alt="{{.alt}}" src="{{$cover.RelPermalink}}" />
     {{- end -}}
     {{with .title}}<h1>{{. | markdownify}}</h1>{{ end }}
@@ -62,7 +62,7 @@ style="background-image:url({{$bg.Permalink}})"
 {{ $title := .title }}
 {{- with .image -}}
     {{$anchor := .anchor | default "" }}
-    {{ $cover := (resources.Get .href).Fill (print (mul .width 2) "x" (mul .height 2) " " $anchor) }}
+    {{ $cover := (partial "util/image.html"  (dict "Page" $top "image" .href)).Fill (print (mul .width 2) "x" (mul .height 2) " " $anchor) }}
 <img class="item-cover" intrinsicsize="{{print (mul .width 2) "x" (mul .height 2)}}" width="{{.width}}" alt="{{.alt | default $title}}" src="{{$cover.RelPermalink}}" />
 {{- end -}}
 {{- with .video -}}
