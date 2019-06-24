@@ -49,7 +49,8 @@ If `series` taxonomy is used, pages from the same series are shown in the relate
 
 ## Menus
 
-* `top` - Top menu shown in the header. Supports one nested level of submenus. Uses the Section name to find the appropriate top level item to highlight.
+* `main` - Top menu shown in the header. Supports one nested level of submenus. Uses the Section name to find the appropriate top level item to highlight.
+* `footer` The footer menu (does not have submenu support).
 
 ## Template blocks
 
@@ -70,6 +71,7 @@ If `series` taxonomy is used, pages from the same series are shown in the relate
     * `recent` - Name of the section to show recents from.
     * `recentCount` - Count for the recent range.
     * `contact` - Optimized version of the contact us snippets. The order and contents are not customizable as you can still use markdown to make a custom version.
+    * `menu` - Displays the menu named `footer`. Does not have sub-menu support.
 
 ## Column arrangements
 
