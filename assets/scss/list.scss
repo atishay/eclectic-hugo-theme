@@ -25,6 +25,13 @@
     &:hover {
         background: transparent;
     }
+
+    .content {
+        background: var(--background-color);
+        padding: 5px;
+        background: var(--background-color);
+        padding: 5px 5px 0 5px;
+    }
 }
 
 .terms {

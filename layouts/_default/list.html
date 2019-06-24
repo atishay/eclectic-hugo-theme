@@ -3,7 +3,7 @@
 <article class="list">
     <h1 class='title'>{{.Title}}</h1>
     <span class='subtitle'>{{.Params.Subtitle}}</span>
-    {{- .Content -}}
+    {{with .Content}}<div class="content">{{ .}}</div> {{- end -}}
 <ul class="blog-posts items-{{.Paginator.PageSize}}">
     {{ range where .Paginator.Pages "Section" .Section}}
 {{- partialCached "util/post.html" . .RelPermalink -}}
