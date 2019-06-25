@@ -2,43 +2,51 @@
 {{$top := . }}
 {{$needsContentRender := true }}
 {{- range .Params.content -}}
-{{ $types := split .type " " }}
-<section {{with .title}}id="{{. | urlize}}"{{ end }} class="meta {{.type | default "default"}}"
-{{- with.background -}}
+{{- $currentContent := . -}}
+{{- if .file -}}
+    {{- if $top.Resources.GetMatch .file -}}
+        {{- $currentContent = $top.Resources.GetMatch .file | transform.Unmarshal -}}
+    {{- else -}}
+        {{- $currentContent = resources.Get .file | transform.Unmarshal -}}
+    {{- end -}}
+{{- end -}}
+{{ $types := split $currentContent.type " " }}
+<section {{with $currentContent.title}}id="{{. | urlize}}" {{ end }} class="meta {{$currentContent.type | default "default"}}"
+{{- with $currentContent.background -}}
 {{ $bg := (partial "util/image.html"  (dict "Page" $top "image" .)).Fill "1400x940" }}
 style="background-image:url({{$bg.Permalink}})"
 {{- end -}}
 >
-    {{$title := .title}}
-    {{- with .icon -}}
+    {{$title := $currentContent.title}}
+    {{- with $currentContent.icon -}}
     {{$title = default $title (findRE "\\w+(?:\\.\\w+)*$" .)}}
     {{- partialCached "util/icon" (dict "key" . "size" 50 "class" "main-icon" "alt" $title) (print . "main-icon") -}}
     {{- end -}}
-    {{- with .image -}}
+    {{- with $currentContent.image -}}
     {{$anchor := .anchor | default "" }}
     {{ $cover := (partial "util/image.html"  (dict "Page" $top "image" .href)).Fill (print (mul .width 2) "x" (mul .height 2) " " $anchor) }}
     <img intrinsicsize="{{print (mul .width 2) "x" (mul .height 2)}}" width="{{.width}}" height="{{.height}}" alt="{{.alt}}" src="{{$cover.RelPermalink}}" />
     {{- end -}}
-    {{with .title}}<h1>{{. | markdownify}}</h1>{{ end }}
-    {{with .subtitle}}<p class="subtitle">{{. | markdownify}}</p>{{ end }}
-    {{with .content}}<p>{{. | markdownify}}</p>{{ end }}
+    {{with $currentContent.title}}<h1>{{. | markdownify}}</h1>{{ end }}
+    {{with $currentContent.subtitle}}<p class="subtitle">{{. | markdownify}}</p>{{ end }}
+    {{with $currentContent.content}}<p>{{. | markdownify}}</p>{{ end }}
     {{- if in $types "content" -}}
     {{ $needsContentRender = false }}
     {{- $top.Content -}}
     {{- end -}}
     {{- if in $types "blog" -}}
     <ul class="items items-{{.count | default 6}}">
-        {{- range first (default 6 .count) (where (where $site.Pages ".Section" .section) ".Kind" "page" ) -}}
+        {{- range first (default 6 .count) (where (where $site.Pages ".Section" $currentContent.section) ".Kind" "page" ) -}}
         {{partialCached "util/post.html" . .RelPermalink}}
         {{- end -}}
     </ul>
     {{- end -}}
-    {{- $defaultFilter := .filter -}}
+    {{- $defaultFilter := $currentContent.filter -}}
     {{- $filter := false -}}
     {{- $list := "" -}}
     {{- $filters := newScratch }}
     {{- if in $types "filter" -}}
-        {{- range .items -}}
+        {{- range $currentContent.items -}}
             {{ $list = print $list " " (trim .filter " ") }}
         {{- end -}}
         {{- $list = uniq (split (trim $list " ") " ") -}}
@@ -50,7 +58,7 @@ style="background-image:url({{$bg.Permalink}})"
     {{end}} class="filter button filter-{{$index}}" value="{{$element}}">
         {{- end -}}
     {{- end -}}
-    {{- with .items}}
+    {{- with $currentContent.items}}
         <div class="items items-{{len .}}">
             {{- range . -}}
             <div class="item {{if ne $list "" }}
