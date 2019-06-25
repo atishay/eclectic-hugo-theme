@@ -129,6 +129,7 @@ CSS Grids are used for column arrangements in the most logical manner.
 
 You can supplied structured metadata in a default page. These pages provide multiple sections with advanced styling and grouping into columns, support for carousels, lists etc. In the front matter, you can supply the following information a list in the `content` to render structured data:
 
+* `file` Reads the structured data from a file instead of from inline properties. The file can be present in the page bundle for the page or the asset bundle for the entire website. It is _recommended_ to use separate files if the data gets large.
 * `title` The title of the section
 * `subtitle` Section's subtitle
 * `image` Top level image for the section:
