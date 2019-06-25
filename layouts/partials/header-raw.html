@@ -87,8 +87,8 @@
         {{- partialCached "util/icon" (dict "key" "gear" "size" 20 "class" "picker" ) "gear-20" -}}
     </div>
     {{ end }}
+    <div id="scroll-indicator"></div>
 </header>
-</div>
 {{/* https://css-tricks.com/markup-for-breadcrumbs/
  https://jsonld.com/breadcrumb/
 {{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }} {{ $.Scratch.Add "path" .Site.BaseURL }}

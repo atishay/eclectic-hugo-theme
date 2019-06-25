@@ -11,6 +11,17 @@ header {
     flex-wrap: wrap;
     z-index: 10;
     will-change: transform;
+    margin-bottom: 7px;
+}
+
+#scroll-indicator {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 2px;
+    background: var(--theme-color);
+    border-bottom-right-radius: 1px;
+    border-top-right-radius: 1px;
 }
 
 // Logo
