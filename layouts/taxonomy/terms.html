@@ -2,7 +2,7 @@
 {{- partialCached "util/background.html" "bg" -}}
 <article class="terms">
     <h1 class='title'>{{.Title}}</h1>
-<span class='subtitle'>The blog is organized with the following {{.Title | lower}} in alphabetical order.</span>
+<span class='subtitle'>The website is organized with the following {{.Title | lower}} in alphabetical order.</span>
 <ol>
     {{ $type := .Type }}
     {{ range $key, $value := .Data.Terms.Alphabetical }}
@@ -14,7 +14,8 @@
 <h4><a href="{{ .Permalink }}">{{ $name | humanize }} </a></h4><small> ({{ $count }} post{{if gt $count 1}}s{{end}})</small>
 <ul>
     {{ range $pages }}
-    <li hugo-nav="{{ .RelPermalink}}"><a href="{{ .Permalink}}">{{ .LinkTitle }}</a></li>
+    <li hugo-nav="{{ .RelPermalink}}"><a
+            href="{{ .Permalink}}">{{ default (.File.ContentBaseName | humanize) .LinkTitle }}</a></li>
     {{ end }}
 </ul>
 </li>
