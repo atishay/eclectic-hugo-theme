@@ -245,6 +245,13 @@
     &:not(:first-of-type) {
         flex: 0;
     }
+    .tags {
+        float: right;
+        display: inline-block;
+        svg {
+            vertical-align: middle;
+        }
+    }
     h1,
     h2,
     h3,

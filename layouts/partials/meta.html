@@ -133,6 +133,14 @@ style="background-image:url({{$bg.Permalink}})"
             <span class='subtitle'>{{.}}</span>
             {{ end }}
             {{ .Content }}
+            {{- with .Params.tags }}
+            <div class="tags">
+            {{- range . -}}
+            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">
+                {{- partialCached "util/icon" (dict "key" "tag" "size" 20) "tag-20" -}} {{ . | humanize }} </a>
+            {{- end -}}
+            </div>
+            {{ end }}
         </article>
     </section>
 {{ end }}
