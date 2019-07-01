@@ -3,6 +3,7 @@
 <article class="terms">
     <h1 class='title'>{{.Title}}</h1>
 <span class='subtitle'>The website is organized with the following {{.Title | lower}} in alphabetical order.</span>
+{{.Content}}
 <ol>
     {{ $type := .Type }}
     {{ range $key, $value := .Data.Terms.Alphabetical }}
@@ -11,7 +12,11 @@
     {{ $pages := .Pages }}
     {{ with $.Site.GetPage (printf "/%s/%s" $type $name) }}
 <li>
-<h4><a href="{{ .Permalink }}">{{ $name | humanize }} </a></h4><small> ({{ $count }} post{{if gt $count 1}}s{{end}})</small>
+<input type="radio" name="categories" id="{{$name}}">
+<label for="{{$name}}">
+    <h4><a href="{{ .Permalink }}">{{ $name | humanize }} </a></h4>
+    <small> ({{ $count }}post{{if gt $count 1}}s{{end}})</small>
+</label>
 <ul>
     {{ range $pages }}
     <li hugo-nav="{{ .RelPermalink}}"><a

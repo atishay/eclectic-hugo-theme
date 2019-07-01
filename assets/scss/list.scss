@@ -44,6 +44,72 @@
     h4 {
         display: inline-block;
     }
+    ol {
+        list-style: none;
+        padding:0;
+    }
+    ol > li  ul{  
+        border: 1px solid var(--theme-color);
+        border-top: 0;
+        border-bottom: 0;
+    }
+    label {
+        padding: 5px 5px 5px 15px;
+        font-weight: bold;
+        cursor: pointer;
+        color: var(--background-color);
+        h4 a {
+            color: var(--background-color);
+        }
+        background: var(--theme-color);
+        &::after {
+            float: right;
+            content: "\276F";
+            width: 1em;
+            height: 1em;
+            text-align: center;
+            transition: all .35s;
+            transform-origin: 50% 100%;
+            right: 5px;
+        }
+        display: block;
+    }
+    li:first-child label {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    li:last-child label {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    input {
+        display: none;
+        &~ ul {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s cubic-bezier(0, 1.05, 0, 1);
+        }
+    }
+    input:checked {
+        +label {
+            &::after {
+                transform: rotate(90deg);
+            }
+        }
+        ~ ul {
+            max-height: 100vh;
+        }
+    }
+    li:last-child input:checked {
+        +label {
+            border-radius: 0;
+        }
+        ~ul {
+            border-bottom: 1px solid var(--theme-color);
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    }
 }
 
 // Used in list and meta views.
