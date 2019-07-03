@@ -5,7 +5,7 @@
     <span class='subtitle'>{{.Params.Subtitle}}</span>
     {{with .Content}}<div class="content">{{ .}}</div> {{- end -}}
 <ul class="blog-posts items-{{.Paginator.PageSize}}">
-    {{ range .Pages}}
+    {{ range .Paginator.Pages}}
 {{- partialCached "util/post.html" . .RelPermalink -}}
     {{ end }}
 </ul>
