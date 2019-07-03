@@ -4,6 +4,7 @@
     padding: 0;
     scroll-behavior: smooth;
     text-align: justify;
+    text-decoration-skip-ink: auto;
 }
 
 html {
@@ -241,6 +242,9 @@ table {
         td,
         th {
             padding: 0;
+        }
+        td:nth-child(2) {
+            width: 99%;
         }
         border-bottom: none;
     }
