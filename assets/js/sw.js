@@ -7,7 +7,7 @@
 
   // Store core files in a cache (including a page to display when offline)
   //  {{- $cover := partial "util/backgroundImage.html" . -}}
-  // {{- $coverDark := partial "util/backgroundImageDark.html" . -}}
+  // {{- $coverDark := partial "util/backgroundImageDark.html" . }}
   function updateStaticCache() {
     const urls = [
       '{{"/" | absURL}}',
