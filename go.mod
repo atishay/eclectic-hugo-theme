@@ -1,3 +1,3 @@
-module github.com/atishay/eclectic-hugo-theme
+module  github.com/hugoinaction/Eclectic
 
 go 1.12
