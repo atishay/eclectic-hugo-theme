@@ -115,6 +115,7 @@
 }
 
 .contact-response {
+    border: 2px double var(--text-color);
     background-color: $shade;
     display: flex;
     justify-content: center;
