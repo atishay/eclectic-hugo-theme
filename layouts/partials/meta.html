@@ -63,7 +63,7 @@ style="background-image:url({{$bg.Permalink}})"
             {{ range . }}
             <div class="item {{- if ne $list "" -}}
             {{- with .filter -}}
-            {{- range (split (trim . " ") " ") }}
+            {{- range (split (trim . " ") " ") -}}
                 filter-{{$filters.Get .}} {{ end -}}
             {{- end -}}
             {{- end -}}">
