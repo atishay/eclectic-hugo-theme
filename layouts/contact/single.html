@@ -93,7 +93,13 @@
                 </ul>
             </section>
         </aside>
-        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="email">
+        {{if $.Page.Params.response }}
+        <div class="contact-response">
+            {{- default "Thank you" $.Site.Params.contact.response -}}
+        </div>
+        {{else}}
+        <form id="contact-us-form" name="contact" method="POST" {{with $.Site.Params.contact.action }} action="{{.}}" {{ end }} data-netlify="true"
+            netlify-honeypot="email">
             <label class="sr-only" for="contact-name">Name</label>
             <input id="contact-name" class="contact-name" required type="name" autocomplete="given-name" placeholder="Name" name="name">
             <label for="contact-email" class="sr-only">Email</label>
@@ -107,6 +113,7 @@
             <textarea id="contact-message" rows="10" class="contact-message" name="message" placeholder="Message" required></textarea>
             <button type="submit">Submit</button>
         </form>
+        {{end}}
     </section>
 {{- with .Params.Footnote -}}
 <small>{{. | markdownify}}</small>

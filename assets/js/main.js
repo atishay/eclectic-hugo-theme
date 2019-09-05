@@ -60,6 +60,26 @@
   });
 
   ///////////////////////////////////////////
+  // Contact Us form
+  ///////////////////////////////////////////
+  const contact = document.getElementById("contact-us-form");
+  if (contact) {
+    contact.addEventListener("submit", (e) => {
+      e.preventDefault();
+      fetch(contact.getAttribute("action"), {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(contact)).toString()
+      }).then(() => {
+        // Remove contact and add Thank You.
+        const div = document.createElement('div');
+        div.className = "contact-response";
+        div.innerHTML = '{{- default "Thank you" $.Site.Params.contact.response -}}';
+        contact.parentNode && contact.parentNode.replaceChild(div, contact);
+      })
+    })
+  }
+
+  ///////////////////////////////////////////
   // Header
   ///////////////////////////////////////////
   // Inspired by https://www.sysleaf.com/js-toggle-header-on-scroll/

@@ -114,6 +114,16 @@
     }
 }
 
+.contact-response {
+    background-color: $shade;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+    padding: 20px;
+    text-align: center;
+}
+
 
 @media (prefers-reduced-motion) {
 
