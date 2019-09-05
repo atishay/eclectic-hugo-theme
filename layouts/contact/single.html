@@ -93,28 +93,21 @@
                 </ul>
             </section>
         </aside>
-        {{- with $.Site.Params.contact -}}
-        <form action="https://docs.google.com/forms/d/e/{{.form}}/formResponse">
-            {{- with .name -}}
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="email">
             <label class="sr-only" for="contact-name">Name</label>
-            <input id="contact-name" class="contact-name" required type="name" autocomplete="given-name" placeholder="Name" name="{{.}}">
-            {{- end -}}
-            {{- with .email -}}
+            <input id="contact-name" class="contact-name" required type="name" autocomplete="given-name" placeholder="Name" name="name">
             <label for="contact-email" class="sr-only">Email</label>
-            <input id="contact-email" class="contact-email`" required type="email" autocomplete="email" placeholder="Email address" name={{.}}>
-            {{- end -}}
-            {{- with .subject -}}
+            <input id="contact-email" class="contact-email" required type="email" autocomplete="email" placeholder="Email address" name="email-address">
+            <label for="email" class="sr-only">Don't fill</label>
+            <input id="email" class="email" type="email" autocomplete="email"
+                placeholder="Email address" name="email">
             <label for="contact-subject" class="sr-only">Subject</label>
-            <input id="contact-subject" class="contact-subject" name="{{.}}" type="text" autocomplete placeholder="Subject">
-            {{- end -}}
-            {{- with .message -}}
+            <input id="contact-subject" class="contact-subject" name="subject" type="text" autocomplete placeholder="Subject">
             <label for="contact-message" class="sr-only">Message</label>
-            <textarea id="contact-message" rows="10" class="contact-message" name="{{.}}" placeholder="Message" required></textarea>
-            {{- end -}}
+            <textarea id="contact-message" rows="10" class="contact-message" name="message" placeholder="Message" required></textarea>
             <button type="submit">Submit</button>
         </form>
     </section>
-{{- end -}}
 {{- with .Params.Footnote -}}
 <small>{{. | markdownify}}</small>
 {{- end -}}
