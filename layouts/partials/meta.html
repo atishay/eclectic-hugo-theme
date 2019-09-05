@@ -61,12 +61,12 @@ style="background-image:url({{$bg.Permalink}})"
     {{ with $currentContent.items}}
         <div class="items items-{{len .}}">
             {{ range . }}
-            <div class="item {{if ne $list "" }}
-            {{ with .filter }}
-            {{ range (split (trim . " ") " ") }}
-                filter-{{$filters.Get .}} {{ end }}
-            {{ end }}
-            {{ end }}">
+            <div class="item {{- if ne $list "" -}}
+            {{- with .filter -}}
+            {{- range (split (trim . " ") " ") }}
+                filter-{{$filters.Get .}} {{ end -}}
+            {{- end -}}
+            {{- end -}}">
 {{ $title := .title }}
 {{ with .image }}
     {{$anchor := .anchor | default "" }}
