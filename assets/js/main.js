@@ -69,11 +69,15 @@
       fetch(contact.getAttribute("action"), {
         method: 'POST',
         body: new URLSearchParams(new FormData(contact)).toString()
-      }).then(() => {
+      }).then(response => {
         // Remove contact and add Thank You.
         const div = document.createElement('div');
         div.className = "contact-response";
-        div.innerHTML = '{{- default "Thank you" $.Site.Params.contact.response -}}';
+        if (response.ok) {
+          div.innerHTML = '{{- default "Thank you" $.Site.Params.contact.response -}}';
+        } else {
+          div.innerHTML = '{{- default "There was an error sending this message. Please try again later" $.Site.Params.contact.responseError -}}'
+        }
         contact.parentNode && contact.parentNode.replaceChild(div, contact);
       })
     })
