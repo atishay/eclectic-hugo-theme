@@ -66,7 +66,7 @@
   if (contact) {
     contact.addEventListener("submit", (e) => {
       e.preventDefault();
-      fetch(contact.getAttribute("action"), {
+      fetch(contact.getAttribute("action") || window.location.pathname, {
         method: 'POST',
         body: new URLSearchParams(new FormData(contact)).toString()
       }).then(response => {
