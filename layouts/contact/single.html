@@ -98,7 +98,7 @@
             {{- default "Thank you" $.Site.Params.contact.response -}}
         </div>
         {{else}}
-        <form id="contact-us-form" name="contact" method="POST" {{with $.Site.Params.contact.action }} action="{{.}}" {{ end }} data-netlify="true">
+        <form id="contact-us-form" name="{{- default "contact" $.Site.Params.contact.name -}}" method="POST" {{with $.Site.Params.contact.action }} action="{{.}}" {{ end }} data-netlify="true">
             <label class="sr-only" for="contact-name">Name</label>
             <input id="contact-name" class="contact-name" required type="name" autocomplete="given-name" placeholder="Name" name="name">
             <label for="contact-email" class="sr-only">Email</label>

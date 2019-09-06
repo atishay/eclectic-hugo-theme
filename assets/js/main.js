@@ -68,7 +68,7 @@
       e.preventDefault();
       fetch(contact.getAttribute("action") || window.location.pathname, {
         method: 'POST',
-        body: new URLSearchParams(new FormData(contact)).toString()
+        body: new FormData(contact)
       }).then(response => {
         // Remove contact and add Thank You.
         const div = document.createElement('div');
