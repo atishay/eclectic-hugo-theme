@@ -92,7 +92,6 @@ CSS Grids are used for column arrangements in the most logical manner.
 
 ## Settings
 
-* `Site.Params.CSP` Set true to enable CSP. *Please test with production environment flag with this*. In production prevents live reload.
 * `Site.Params.colorPickerEnabled` Enable color picker to help the user switch color themes as well as dark mode.
 * `Site.Params.checksDarkMode` - Should enable automatic switching to dark mode based on media query.
 * `Site.Params.custom_css` - Custom CSS File for overrides.

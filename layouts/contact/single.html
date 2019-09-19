@@ -93,28 +93,27 @@
                 </ul>
             </section>
         </aside>
-        {{- with $.Site.Params.contact -}}
-        <form action="https://docs.google.com/forms/d/e/{{.form}}/formResponse">
-            {{- with .name -}}
+        {{if $.Page.Params.response }}
+        <div class="contact-response">
+            {{- default "Thank you" $.Site.Params.contact.response -}}
+        </div>
+        {{else}}
+        <form id="contact-us-form" name="{{- default "contact" $.Site.Params.contact.name -}}" method="POST" {{with $.Site.Params.contact.action }} action="{{.}}" {{ end }} data-netlify="true" netlify-honeypot="email">
             <label class="sr-only" for="contact-name">Name</label>
-            <input id="contact-name" class="contact-name" required type="name" autocomplete="given-name" placeholder="Name" name="{{.}}">
-            {{- end -}}
-            {{- with .email -}}
+            <input id="contact-name" class="contact-name" required type="name" autocomplete="given-name" placeholder="Name" name="name">
             <label for="contact-email" class="sr-only">Email</label>
-            <input id="contact-email" class="contact-email`" required type="email" autocomplete="email" placeholder="Email address" name={{.}}>
-            {{- end -}}
-            {{- with .subject -}}
+            <input id="contact-email" class="contact-email" required type="email" autocomplete="email" placeholder="Email address" name="email-address">
+            <label for="email" class="sr-only">Don't fill</label>
+            <input id="email" tabindex="-1" class="email" type="text" autocomplete="email"
+                placeholder="Email address" name="email">
             <label for="contact-subject" class="sr-only">Subject</label>
-            <input id="contact-subject" class="contact-subject" name="{{.}}" type="text" autocomplete placeholder="Subject">
-            {{- end -}}
-            {{- with .message -}}
+            <input id="contact-subject" class="contact-subject" name="subject" type="text" autocomplete placeholder="Subject">
             <label for="contact-message" class="sr-only">Message</label>
-            <textarea id="contact-message" rows="10" class="contact-message" name="{{.}}" placeholder="Message" required></textarea>
-            {{- end -}}
+            <textarea id="contact-message" rows="10" class="contact-message" name="message" placeholder="Message" required></textarea>
             <button type="submit">Submit</button>
         </form>
+        {{end}}
     </section>
-{{- end -}}
 {{- with .Params.Footnote -}}
 <small>{{. | markdownify}}</small>
 {{- end -}}

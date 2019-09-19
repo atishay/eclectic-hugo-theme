@@ -6,9 +6,6 @@
 {{- end -}}
 {{- hugo.Generator }}
 <meta name="robots" content="index, follow">
-{{- if eq .Site.Params.CSP true }}
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: www.gravatar.com www.google-analytics.com stats.g.doubleclick.net www.google.com; connect-src {{ if .Site.IsServer }}ws:{{ end }} 'self'; worker-src 'self' www.google-analytics.com; frame-src www.youtube-nocookie.com; object-src 'none'">
-{{- end -}}
 
 {{- block "favicon" . }}
 {{- if (fileExists "assets/image/favicon.svg") }}

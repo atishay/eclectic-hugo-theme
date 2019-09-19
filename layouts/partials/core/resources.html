@@ -12,10 +12,10 @@
     {{- $main := $sass | resources.ExecuteAsTemplate "main.scss" . | toCSS $cssOpts -}}
     {{- $cssFiles := slice $main $syntax | resources.Concat "css/index.css" -}}
     {{- $css := $cssFiles | resources.Minify | resources.Fingerprint "sha512" }}
-<link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" media="none" onload="if(media!='all')media='all'">
+<link rel="stylesheet" href="{{ $css.Permalink }}" media="none" onload="if(media!='all')media='all'">
     {{- $res = $res | append $css.Permalink }}
 <noscript>
-  <link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" media="screen">
+  <link rel="stylesheet" href="{{ $css.Permalink }}" media="screen">
 </noscript>
 <style>
   html {
@@ -34,7 +34,7 @@
 {{- $res = $res | append $main.Permalink -}}
 {{- else -}}
 {{- $js := slice $main | resources.Concat "index.js" | resources.Minify | resources.Fingerprint "sha512" }}
-<script type="text/javascript" src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+<script type="text/javascript" src="{{ $js.Permalink }}" defer></script>
 {{- $res = $res | append $js.Permalink -}}
 {{- end -}}
 

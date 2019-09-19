@@ -11,5 +11,8 @@
         {{- partial "header.html" . -}}
         {{- block "main" . }}{{- end }}
         {{- partialCached "footer.html" . -}}
+        {{- if .Site.Params.DebugMenu -}}
+        {{- partial "debug/debug.html" (dict "context" .) -}}
+        {{- end -}}
     </body>
 </html>
