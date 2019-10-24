@@ -4,7 +4,11 @@
     {{- with .Title -}}
     <h3>{{.}}</h3>
     {{- else -}}
+    {{if eq .Kind "section" }}
+    <h3>{{path.Dir .File.Path | path.Base | humanize}}</h3>
+    {{ else}}
     <h3>{{.File.ContentBaseName | humanize}}</h3>
+    {{- end -}}
     {{- end -}}
     </a>
     {{- with .Description -}}
