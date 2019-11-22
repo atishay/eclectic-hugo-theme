@@ -51,7 +51,7 @@ $hamburger-size: calc(8px + var(--header-height) / 2);
     z-index: 2;
 }
 
-.hamburger~.icon {
+.hamburger ~ .icon {
     display: block;
     width: $hamburger-size;
     height: $hamburger-size;
@@ -68,7 +68,7 @@ $hamburger-size: calc(8px + var(--header-height) / 2);
     }
 }
 
-.hamburger:checked~.icon {
+.hamburger:checked ~ .icon {
     .bar:nth-of-type(2) {
         opacity: 0;
     }
@@ -84,14 +84,14 @@ $hamburger-size: calc(8px + var(--header-height) / 2);
 
 @include media(">=md") {
     .hamburger,
-    .hamburger~.icon {
+    .hamburger ~ .icon {
         display: none;
     }
 }
 
 // Menu
 @include media("<md") {
-    .hamburger:checked~.top-menu {
+    .hamburger:checked ~ .top-menu {
         max-height: 100vh;
         opacity: 1;
         padding: 15px 0;
@@ -350,18 +350,18 @@ $hamburger-size: calc(8px + var(--header-height) / 2);
         padding: 7px 10px 7px 30px;
         background: none;
         width: 170px;
-        &~.results {
+        & ~ .results {
             width: 130px;
         }
         &:focus {
             width: 300px;
-            &~.results{
+            & ~ .results{
                 width: 260px;
                 max-height: 500px;
                 transition: width .2s ease-in-out,
                 max-height 0.5s ease-in-out;
             }
-            &~svg {
+            & ~ svg {
                 color: rgba(var(--text-color-rgb), 0.6);
             }
         }
@@ -460,7 +460,7 @@ $hamburger-size: calc(8px + var(--header-height) / 2);
         }
         input:focus {
             width: calc(var(--max-width));
-            &~.results {
+            & ~ .results {
                 width: calc(var(--max-width) - 20px);
             }
         }
@@ -470,23 +470,23 @@ $hamburger-size: calc(8px + var(--header-height) / 2);
         input:focus {
             margin-left: 20px;
             width: calc(100vw - 2*var(--header-height));
-            &~.results {
+            & ~ .results {
                 margin-left: 30px;
                 width: calc(100vw - 2*var(--header-height) - 20px);
             }
         }
-        input:focus~svg {
+        input:focus ~ svg {
             left:27px;
         }
     }
     @include media("<sm") {
         input:focus {
             margin-left: 0;
-            &~.results {
+            & ~ .results {
                 margin-left: 10px;
             }
         }
-        input:focus~svg {
+        input:focus ~ svg {
             left: 7px;
         }
         input:not(:focus) {
@@ -495,10 +495,10 @@ $hamburger-size: calc(8px + var(--header-height) / 2);
             border-radius: 0;
             background: var(--theme-color);
             border:none;
-            &~svg {
+            & ~ svg {
                 color: var(--background-color);
             }
-            &~.results {
+            & ~ .results {
                 width: 0;
             }
         }
