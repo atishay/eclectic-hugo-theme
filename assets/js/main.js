@@ -400,7 +400,7 @@
     }
   }
 
-  const search = new Search();
+new Search();
   // {{ end }}
   ///////////////////////////////////////////
   // Service Worker
