@@ -14,13 +14,13 @@
 <li>
 <input type="radio" name="categories" id="{{$name}}">
 <label for="{{$name}}">
-    <h4><a href="{{ .Permalink }}">{{ $name | humanize }} </a></h4>
+    <h4><a href="{{ .RelPermalink }}">{{ $name | humanize }} </a></h4>
     <small> ({{ $count }}post{{if gt $count 1}}s{{end}})</small>
 </label>
 <ul>
     {{ range $pages }}
     <li hugo-nav="{{ .RelPermalink}}"><a
-            href="{{ .Permalink}}">{{ default (.File.ContentBaseName | humanize) .LinkTitle }}</a></li>
+            href="{{ .RelPermalink}}">{{ default (.File.ContentBaseName | humanize) .LinkTitle }}</a></li>
     {{ end }}
 </ul>
 </li>

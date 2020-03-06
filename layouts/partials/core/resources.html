@@ -1,41 +1,38 @@
 {{- $res := slice -}}
+{{- $syntax := resources.Get "css/syntax.css" -}}
+{{$main := $syntax}}
+{{if $.Param "scss" }}
   {{- $sass := resources.Get "scss/main.scss" -}}
   {{- $cssOpts := cond (.Site.IsServer) (dict "enableSourceMap" true ) (dict "outputStyle" "compressed") -}}
-  {{- if .Site.IsServer -}}
-      {{- $syntax := resources.Get "css/syntax.css" }}
-<link rel="stylesheet" href="{{ $syntax.Permalink | absURL }}" media="screen">
-      {{- $css := $sass | resources.ExecuteAsTemplate "main.scss" . | toCSS $cssOpts }}
-<link rel="stylesheet" href="{{ $css.Permalink | absURL }}" media="screen">
-    {{ $res = $res | append $syntax.Permalink $css.Permalink }}
-  {{- else -}}
-    {{- $syntax := resources.Get "css/syntax.css" -}}
-    {{- $main := $sass | resources.ExecuteAsTemplate "main.scss" . | toCSS $cssOpts -}}
+    {{- $main = $sass | resources.ExecuteAsTemplate "main.scss" . | toCSS $cssOpts -}}
+{{- else -}}
+    {{ $main = resources.Get "compiled/main.css" | resources.ExecuteAsTemplate "main.css" .}}
+{{- end -}}
     {{- $cssFiles := slice $main $syntax | resources.Concat "css/index.css" -}}
     {{- $css := $cssFiles | resources.Minify | resources.Fingerprint "sha512" }}
-<link rel="stylesheet" href="{{ $css.Permalink }}" media="none" onload="if(media!='all')media='all'">
-    {{- $res = $res | append $css.Permalink }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" media="none" onload="if(media!='all')media='all'">
+    {{- $res = $res | append $css.RelPermalink }}
 <noscript>
-  <link rel="stylesheet" href="{{ $css.Permalink }}" media="screen">
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" media="screen">
 </noscript>
 <style>
   html {
     opacity: 0;
   }
 </style>
-  {{- end -}}
   {{- range .Site.Params.custom_css -}}
     {{- $res = $res | append . }}
-<link rel="stylesheet" href="{{ $.Site.BaseURL }}{{ . }}">
+<link rel="stylesheet" href="{{ . }}">
   {{- end -}}
 
 {{- $main := resources.Get "js/main.js" | resources.ExecuteAsTemplate "js/main.js" . -}}
 {{- if .Site.IsServer }}
-<script type="text/javascript" src="{{ $main.Permalink }}" defer></script>
-{{- $res = $res | append $main.Permalink -}}
+<script type="text/javascript" src="{{ $main.RelPermalink }}" defer></script>
+{{- $res = $res | append $main.RelPermalink -}}
 {{- else -}}
-{{- $js := slice $main | resources.Concat "index.js" | resources.Minify | resources.Fingerprint "sha512" }}
-<script type="text/javascript" src="{{ $js.Permalink }}" defer></script>
-{{- $res = $res | append $js.Permalink -}}
+{{- $js := slice $main | resources.Concat "index.js" | resources.Minify }}
+<script type="text/javascript" src="{{ $js.RelPermalink }}" defer></script>
+{{- $res = $res | append $js.RelPermalink -}}
 {{- end -}}
 
 {{- if not .Site.IsServer }}
@@ -44,7 +41,7 @@
 
 {{- $sw := resources.Get "js/sw.js" -}}
 {{- $sw = $sw | resources.ExecuteAsTemplate "sw.js" (dict "page" . "res" $res) | resources.Minify -}}
-<!-- {{- $sw.Permalink -}} -->
+<!-- {{- $sw.RelPermalink -}} -->
 <script>
   if (window.localStorage.color) {
     document.documentElement.style.setProperty("--theme-color", window.localStorage.color);

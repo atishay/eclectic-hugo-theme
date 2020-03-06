@@ -14,7 +14,7 @@
 <section {{with $currentContent.title}}id="{{. | urlize}}" {{ end }} class="meta {{$currentContent.type | default "default"}}"
 {{ with $currentContent.background }}
 {{ $bg := (partial "util/image.html"  (dict "Page" $top "image" .)).Fill "1400x940" }}
-style="background-image:url({{$bg.Permalink}})"
+style="background-image:url({{$bg.RelPermalink}})"
 {{ end }}
 >
     {{$title := $currentContent.title}}
