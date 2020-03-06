@@ -81,10 +81,10 @@
 {{ if .Site.IsServer }}
 <script type="text/javascript" src="{{ $js.RelPermalink }}"></script>
 {{ else }}
-<script type="text/javascript" src="{{ ($js | minify | fingerprint).RelPermalink }}"></script>
+<script type="text/javascript" src="{{ ($js | minify).RelPermalink }}"></script>
 {{ end }}
 
 {{- $debugprint := resources.Get "css/debugprint.css" -}}
-{{- $debug := resources.Get "scss/debug.scss" | toCSS -}}
-{{- $css := slice $debug $debugprint | resources.Concat "css/index.css" -}}
+{{- $debug := resources.Get "css/debug.css" -}}
+{{- $css := slice $debug $debugprint | resources.Concat "css/debug.css" -}}
 <link rel="stylesheet" href="{{ $css.Permalink }}" media="screen">
