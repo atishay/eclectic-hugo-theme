@@ -16,7 +16,7 @@
         {{ $hamburger.Content | safeHTML }}
     </a>
     {{/* End Checkbox hack code. Uses the parallel <ul as well> */}}
-    <a role="button" class="logo" href="{{.Site.BaseURL}}">
+    <a role="button" class="logo" href="/">
         {{- if (fileExists "assets/image/logo.svg") }}
         {{ (resources.Get "image/logo.svg").Content | safeHTML }}
         {{- else if (fileExists "assets/image/logo.png") -}}
@@ -91,7 +91,7 @@
 </header>
 {{/* https://css-tricks.com/markup-for-breadcrumbs/
  https://jsonld.com/breadcrumb/
-{{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }} {{ $.Scratch.Add "path" .Site.BaseURL }}
+{{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }} {{ $.Scratch.Add "path" / }}
 <nav class="breadcrumbs">
         <a href="/">home</a>
     {{ range $index, $element := split $url "/" }} {{ $.Scratch.Add "path" $element }} {{ if ne $element "" }}

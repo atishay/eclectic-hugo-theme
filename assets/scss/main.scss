@@ -10,8 +10,8 @@
   {{- $cover := partial "util/backgroundImage.html" . -}}
   {{- $coverDark := partial "util/backgroundImageDark.html" . -}}
 */
-$cover: "{{$cover.Permalink}}";
-$coverDark: "{{$coverDark.Permalink}}";
+$cover: "{{$cover.RelPermalink}}";
+$coverDark: "{{$coverDark.RelPermalink}}";
 
 :root {
   --theme-color-rgb: {{$r}}, {{$g}}, {{$b}};
