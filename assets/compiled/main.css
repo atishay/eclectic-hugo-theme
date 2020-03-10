@@ -8,8 +8,8 @@
   {{- $g := mod $color 256 -}}
   {{- $color = sub $color $g -}}
   {{- $r := div $color 256 -}}
-  {{- $cover := partial "util/backgroundImage.html" . -}}
-  {{- $coverDark := partial "util/backgroundImageDark.html" . -}}
+  {{- $cover := (partial "util/backgroundImage.html" .).Permalink -}}
+  {{- $coverDark := (partial "util/backgroundImageDark.html" .).Permalink -}}
 */
 
 :root {
