@@ -103,8 +103,9 @@ strong {
     font-weight: 500;
 }
 
-em {
-
+em strong {
+    font-weight: 700;
+    color: var(--theme-color);
 }
 
 blockquote {
