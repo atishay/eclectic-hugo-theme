@@ -96,6 +96,22 @@ style="background-image:url({{$bg.RelPermalink}})"
     <h4>{{. | markdownify}}</h4>
 {{ end }}
 
+{{ with .book }}
+{{ $front := ((partial "util/image.html" (dict "Page" $top "image" .front)).Resize "600x") }}
+{{ $left := ((partial "util/image.html" (dict "Page" $top "image" .left)).Resize "600x") }}
+{{ $right := ((partial "util/image.html" (dict "Page" $top "image" .right)).Resize "600x") }}
+<div class="book">
+    <div class="back"></div>
+    <div class="page6"><img src="{{$right.Permalink}}" alt="{{.title}} Page 2" width="100%" height="100%"></div>
+    <div class="page5"><img src="{{$left.Permalink}}" alt="{{.title}} Page 1" width="100%" height="100%"></div>
+    <div class="page4"></div>
+    <div class="page3"></div>
+    <div class="page2"></div>
+    <div class="page1"></div>
+    <div class="front"><img src="{{$front.Permalink}}" alt="{{.title}}" width="100%" height="100%"></div>
+</div>
+{{end}}
+
 {{ with .content}}
     <div class="content">{{. | markdownify}}</div>
 {{ end }}

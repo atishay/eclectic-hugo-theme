@@ -372,6 +372,7 @@
 
       let results = [];
       if (this.input.value.length === 0) {
+        console.log(this.data)
         results = this.data.sort((b, a) => new Date(a.date).getTime() - new Date(b.date).getTime());
       } else {
         results = this.search(this.input.value);
@@ -459,7 +460,7 @@ new Search();
     });
     ['.left-image', '.meta.default .item', '.item-icon-left .item', '.meta.default', '.max-2', '.max-2 .item', '.filter', '.filter .item',
       '.blog', '.blog .item', 'footer .items', '.contact', '.more', '.comments', '.comments form',
-      '.item-icon-left', '.full-width', '.full-width .item'].forEach(s => {
+      '.item-icon-left', '.full-width', '.full-width .item', '.meta.single', '.meta.single .content'].forEach(s => {
 
         document.querySelectorAll(s).forEach(x => {
           const rect = x.getBoundingClientRect();
