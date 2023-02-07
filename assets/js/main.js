@@ -460,7 +460,7 @@ new Search();
     });
     ['.left-image', '.meta.default .item', '.item-icon-left .item', '.meta.default', '.max-2', '.max-2 .item', '.filter', '.filter .item',
       '.blog', '.blog .item', 'footer .items', '.contact', '.more', '.comments', '.comments form',
-      '.item-icon-left', '.full-width', '.full-width .item', '.meta.single', '.meta.single .content'].forEach(s => {
+      '.item-icon-left', '.full-width', '.full-width .item', '.meta.single', '.meta.single .content', '.book'].forEach(s => {
 
         document.querySelectorAll(s).forEach(x => {
           const rect = x.getBoundingClientRect();
