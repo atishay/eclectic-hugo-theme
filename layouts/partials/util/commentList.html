@@ -1,8 +1,7 @@
 {{$response := newScratch}}
-{{if and site.Params.NetlifyCommentForm (getenv "COMMENTS_TOKEN")}}
+{{if and site.Params.comment.form (getenv "COMMENTS_TOKEN")}}
 
-  {{$comments:= getJSON "https://api.netlify.com/api/v1/forms/" site.Params.NetlifyCommentForm "/submissions?access_token=" (getenv "COMMENTS_TOKEN")}} 
-
+  {{$comments:= getJSON "https://api.netlify.com/api/v1/forms/" site.Params.comment.form "/submissions?access_token=" (getenv "COMMENTS_TOKEN")}} 
   {{ range (sort $comments "created_at" "asc") }}
     {{if not ($response.Get .data.url)}}
       {{$response.Set .data.url (slice )}}
