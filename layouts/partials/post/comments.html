@@ -1,27 +1,21 @@
-{{ $ID := .File.UniqueID }}
 {{ with $.Site.Params.comment }}
 <section class="comments">
   <h2>Comments</h2>
   <ul>
-  {{ $hasComment := false }}
- {{/* $comments := getCSV "," ( printf "https://docs.google.com/feeds/download/spreadsheets/Export?key=%s&exportFormat=csv" .sheet ) }}
- {{ range $r := $comments }}
-  {{ if eq (index $r 3) $ID}}
-  {{ $hasComment := true }}
-  <li class="comment">
-    {{ $time := index $r 0}}
-    <img intrinsicsize="100x100" width="100px" height="100px" src="https://www.gravatar.com/avatar/{{ md5 (index $r 1) }}?s=100&d=identicon" alt="{{ index $r 2 }}">
-    <span class="commenter-name">{{ index $r 2 }}</span>
+{{$comments := partialCached "util/commentList.html" .}}
+{{range index $comments $.RelPermalink }}
+<li class="comment">
+  <img intrinsicsize="100x100" width="100px" height="100px"
+    src="https://www.gravatar.com/avatar/{{ md5 (index .data "Email") }}?s=100&d=identicon" alt="{{ index .data "Name" }}">
+    <span class="commenter-name">{{ index .data "Name" }}</span>
+    
+    {{ $time := .created_at}}
     {{ $icon := resources.Get "image/line-awesome/fa-calendar.svg" | resources.Minify }}
     {{ replace $icon.Content "<svg " "<svg width=\"30px\" "  | safeHTML }}
     <time datetime="{{$time}}">{{(time $time).Format "Monday, Jan 2, 2006."}}</time>
-    <div class="commenter-comment">{{ index $r 4 | emojify }}</div>
+    <div class="commenter-comment">{{ index .data "Comment" | emojify }}</div>
   </li>
-  {{ end }}
- {{ end 
-
-*/}}
-  {{ if ne $hasComment true }}
+  {{ else }}
   <li>
     No comments yet. Be the first to post.
   </li>
@@ -36,8 +30,8 @@
   <label for="comment-email" class="sr-only">Email</label>
   <input id="comment-email" class="comment-email" required type="email" autocomplete="email" placeholder="Email address"
   name="Email">
-  <input id-="commenter-id" name="id" />
-  <input type="hidden" name="url" value="{{.RelPermalink}}">
+  <input id="commenter-id" name="id" />
+  <input type="hidden" name="url" value="{{$.RelPermalink}}">
   <label for="comment" class="sr-only">Comment</label>
   <textarea id="comment" rows="10" class="comment-text" name="Comment" placeholder="Your comment" required></textarea>
   <button type="submit">Post Comment</button>
