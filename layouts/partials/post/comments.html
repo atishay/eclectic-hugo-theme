@@ -6,7 +6,7 @@
 {{range index $comments $.RelPermalink }}
 <li class="comment">
   <img intrinsicsize="100x100" width="100px" height="100px"
-    src="https://www.gravatar.com/avatar/{{ md5 (index .data "Email") }}?s=100&d=identicon" alt="{{ index .data "Name" }}">
+    src="https://www.gravatar.com/avatar/{{ md5 (index .data "Email") }}.jpg" alt="{{ index .data "Name" }}">
     <span class="commenter-name">{{ index .data "Name" }}</span>
     
     {{ $time := .created_at}}
