@@ -102,7 +102,6 @@ CSS Grids are used for column arrangements in the most logical manner.
 * `Site.Params.description` - Default Description.
 * `Site.Params.sidebar` - Shared sidebar for all posts. Will be available under the post specific sidebar.
 * `Site.Params.sharedHeader` - List of sections where the header has no changes (like blogs unless we have a submenu). This cached headers to improve performance.
-* `Site.Params.Tex` - tex2svg hosted location.
 * `Site.Params.Guitar` - guitar2svg hosted location.
 * `Site.Params.scss` - Set this to true if using Hugo extended - the scss version is pre-compiled as main.css to support non-extended Hugo version. This is to allow new developers on Hugo to non get stuck with the extended requirement. Enable if looking for CSS bugs.
 
@@ -122,7 +121,6 @@ CSS Grids are used for column arrangements in the most logical manner.
 ## Shortcodes
 
 * `fig` Same as `figure`, but added support for providing image size.
-* `tex` Renders Latex as SVG. Optional parameter `inline` for inline latex. Needs `Site.Params.Tex` for the `tex2svg` hosting.
 * `guitar` Renders guitar tabs and chords using jtab. Needs `Site.Params.Guitar` for the `guitar2svg` hosting.
 
 ## Structured metadata
