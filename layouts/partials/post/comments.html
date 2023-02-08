@@ -5,8 +5,9 @@
 {{$comments := partialCached "util/commentList.html" .}}
 {{range index $comments $.RelPermalink }}
 <li class="comment">
+  {{$avatar := resources.GetRemote (print "https://www.gravatar.com/avatar/" ( md5 (index .data "Email") ) ".jpg") | resources.Minify }}
   <img intrinsicsize="100x100" width="100px" height="100px"
-    src="https://www.gravatar.com/avatar/{{ md5 (index .data "Email") }}.jpg" alt="{{ index .data "Name" }}">
+    src="{{$avatar.RelPermalink}}" alt="{{ index .data "Name" }}">
     <span class="commenter-name">{{ index .data "Name" }}</span>
     
     {{ $time := .created_at}}
