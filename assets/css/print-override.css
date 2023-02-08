@@ -1,0 +1,49 @@
+@media screen {
+  .page {
+    position: relative;
+  }
+  .attribution {
+    background-color: rgba(255,255,255,0.8);
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: xx-small;
+  }
+  .attribution a {
+    color: blue;
+  }
+  .logo {
+    background: white;
+    padding: 15px;
+    position: fixed;
+    margin: 0;
+    top: 0;
+    left: 0;
+    border-bottom-right-radius: 15px;
+    border-bottom: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    
+  }
+}
+
+@media print {
+  .attribution {
+    display: none;
+  }
+  .logo {
+    display: none;
+  }
+  @page {
+    /** Remove headers and footers **/
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  .page {
+    padding-top: 2cm !important;
+    padding-bottom: 2cm !important;
+  }
+}
+
+h1:first-child {
+  text-align: center;
+}

@@ -1,0 +1,22 @@
+<html>
+  {{- $paper := resources.Get "css/sheets-of-paper.css" -}}
+  {{- $overrides := resources.Get "css/print-override.css" -}}
+  {{- $css := slice $paper $overrides | resources.Concat "css/print.css" -}}
+<link rel="stylesheet" href="{{ $css.Permalink }}">
+  <body>
+    <a role="button" class="logo" href="{{.Site.BaseURL}}">
+      {{- if (fileExists "assets/image/logo.svg") }}
+      {{ (resources.Get "image/logo.svg").Content | safeHTML }}
+      {{- else if (fileExists "assets/image/logo.png") -}}
+      <img height="47px" src="{{((resources.Get " image/logo.png").Resize "x47" ).RelPermalink}}">
+      {{- else -}}
+      {{ .Site.Title }}
+      {{- end -}}
+    </a>
+    <div class="page">
+      {{ replaceRE `<hr>\s+<hr>` "</div><div class='page'>" .Content | safeHTML }}
+      <small class="attribution">
+        Using <a href="https://github.com/delight-im/HTML-Sheets-of-Paper">HTML sheets of paper</a> css library</small>
+    </div>
+  </body>
+</html>
