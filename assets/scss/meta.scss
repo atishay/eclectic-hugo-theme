@@ -8,6 +8,7 @@
     background: $shade;
 }
 .meta {
+    scroll-snap-align: start;
     & > :last-child {
         margin-bottom: 40px;
     }
@@ -311,6 +312,7 @@
         display: block;
         .item {
             padding: 40px 0;
+            scroll-snap-align: start;
             @include container;
             display: block;
             .item-cover {
