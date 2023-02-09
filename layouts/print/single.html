@@ -4,17 +4,17 @@
   {{- $css := slice $paper $overrides | resources.Concat "css/print2.css" -}}
 <link rel="stylesheet" href="{{ $css.Permalink }}">
   <body>
-    <a role="button" class="logo" href="{{.Site.BaseURL}}">
-      {{- if (fileExists "assets/image/logo.svg") }}
-      {{ (resources.Get "image/logo.svg").Content | safeHTML }}
-      {{- else if (fileExists "assets/image/logo.png") -}}
-      <img height="47px" src="{{((resources.Get " image/logo.png").Resize "x47" ).RelPermalink}}">
-      {{- else -}}
-      {{ .Site.Title }}
-      {{- end -}}
-    </a>
-    <a class="print-icon" href="javascript:window.print()">{{ partialCached "util/icon" (dict "key" "print" "size" 30 "alt" "print" "class" "item-icon") (print .
-    "item-icon") }}</a>
+      <a role="button" class="logo" href="{{.Site.BaseURL}}">
+        {{- if (fileExists "assets/image/logo.svg") }}
+        {{ (resources.Get "image/logo.svg").Content | safeHTML }}
+        {{- else if (fileExists "assets/image/logo.png") -}}
+        <img height="47px" src="{{((resources.Get " image/logo.png").Resize "x47" ).RelPermalink}}">
+        {{- else -}}
+        {{ .Site.Title }}
+        {{- end -}}
+      </a>
+      <a class="print-icon" href="javascript:window.print()">{{ partialCached "util/icon" (dict "key" "print" "size" 30 "alt" "print" "class" "item-icon") (print .
+      "item-icon") }}</a>
     <div class="page">
       {{ replaceRE `<hr>\s+<hr>` "</div><div class='page'>" .Content | safeHTML }}
     </div>
