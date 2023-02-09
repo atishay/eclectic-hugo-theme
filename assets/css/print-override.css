@@ -3,14 +3,28 @@
     position: relative;
   }
   .attribution {
-    background-color: rgba(255,255,255,0.8);
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
+    background-color: white;
+    float: right;
     font-size: xx-small;
+    padding: 15px;
+    border-top-left-radius: 15px;
+    border-top: 1px solid #DDD;
+    border-left: 1px solid #DDD;
   }
   .attribution a {
     color: blue;
+  }
+  .print-icon {
+    position: fixed;
+    right: 0;
+    padding: 20px;
+    background: white;
+    margin: 0;
+    top: 0;
+    color: black;
+    border-bottom-left-radius: 15px;
+    border-bottom: 1px solid #DDD;
+    border-left: 1px solid #DDD;
   }
   .logo {
     background: white;
@@ -22,7 +36,6 @@
     border-bottom-right-radius: 15px;
     border-bottom: 1px solid #DDD;
     border-right: 1px solid #DDD;
-    
   }
 }
 
@@ -30,7 +43,7 @@
   .attribution {
     display: none;
   }
-  .logo {
+  .logo, .print-icon{
     display: none;
   }
   @page {
@@ -39,11 +52,68 @@
     margin-bottom: 0 !important;
   }
   .page {
-    padding-top: 2cm !important;
+    padding-top: 2.5cm !important;
     padding-bottom: 2cm !important;
   }
 }
 
 h1:first-child {
   text-align: center;
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: x-large;
+}
+
+.subtitle {
+  font-size: x-small;
+  font-weight: 600;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.subtitle a {
+  text-decoration: underline;
+}
+
+h3 {
+  font-size: 1.0.95em;
+  margin: 20px 0 7px;
+}
+
+p {
+  font-size: 0.95em;
+  text-align: justify;
+}
+
+li {
+  font-size: 0.95em;
+  text-align: justify
+}
+
+ul, p {
+  margin: 5px 0 20px 0;
+}
+
+p {
+  padding-left: 25px;
+}
+
+h4 {
+  margin: 5px 0;
+  font-size: 0.95em;
+}
+h5 {
+  margin: 0;
+  font-size: 0.95em;
+  font-weight: 400;
+  display: inline-block;
+  font-style: italic;
+}
+
+.right {
+  float:right;
+  display: inline;
 }

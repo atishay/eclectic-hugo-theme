@@ -1,7 +1,7 @@
 <html>
   {{- $paper := resources.Get "css/sheets-of-paper.css" -}}
   {{- $overrides := resources.Get "css/print-override.css" -}}
-  {{- $css := slice $paper $overrides | resources.Concat "css/print.css" -}}
+  {{- $css := slice $paper $overrides | resources.Concat "css/print2.css" -}}
 <link rel="stylesheet" href="{{ $css.Permalink }}">
   <body>
     <a role="button" class="logo" href="{{.Site.BaseURL}}">
@@ -13,10 +13,12 @@
       {{ .Site.Title }}
       {{- end -}}
     </a>
+    <a class="print-icon" href="javascript:window.print()">{{ partialCached "util/icon" (dict "key" "print" "size" 30 "alt" "print" "class" "item-icon") (print .
+    "item-icon") }}</a>
     <div class="page">
       {{ replaceRE `<hr>\s+<hr>` "</div><div class='page'>" .Content | safeHTML }}
-      <small class="attribution">
-        Using <a href="https://github.com/delight-im/HTML-Sheets-of-Paper">HTML sheets of paper</a> css library</small>
     </div>
+    <small class="attribution">
+      Using <a href="https://github.com/delight-im/HTML-Sheets-of-Paper">HTML sheets of paper</a> css library</small>
   </body>
 </html>
