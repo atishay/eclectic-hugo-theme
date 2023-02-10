@@ -128,7 +128,7 @@ table {
 		width: initial !important;
 		min-height: initial !important;
 		margin: 0 !important;
-		padding: 0 !important;
+		padding: 0;
 		border: initial !important;
 		border-radius: initial !important;
 		background: initial !important;

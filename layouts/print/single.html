@@ -2,6 +2,34 @@
   {{- $paper := resources.Get "css/sheets-of-paper.css" -}}
   {{- $overrides := resources.Get "css/print-override.css" -}}
   {{- $css := slice $paper $overrides | resources.Concat "css/print2.css" -}}
+  <script>
+    
+        const isChromium = brand => brand.brand === "Chromium";
+        let styles;
+        if(!!globalThis.navigator?.userAgentData?.brands?.some(isChromium)) {
+          // Chrome specific hide margin.
+          styles = `
+                @page {
+                  margin-top: 0 !important;
+                  margin-bottom: 0 !important;
+                }
+                @media print {
+                  .page {
+                    padding: 0 !important;
+                    padding-top: 2.5cm !important;
+                    padding-bottom: 2cm !important;
+                    
+                  }
+                }
+            `
+        } else {
+          styles = `@media print {.page { padding: 0 !important; }}`;
+        }
+        const styleSheet = document.createElement("style")
+          styleSheet.innerText = styles
+          document.head.appendChild(styleSheet)
+      
+  </script>
 <link rel="stylesheet" href="{{ $css.Permalink }}">
   <body>
       <a role="button" class="logo" href="{{.Site.BaseURL}}">

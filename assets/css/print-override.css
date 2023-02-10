@@ -46,30 +46,6 @@
   .logo, .print-icon{
     display: none;
   }
-  /** Remove headers and footers **/
-  /* 
-  @page {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
-  .page {
-    padding-top: 2.5cm !important;
-    padding-bottom: 2cm !important;
-  } 
-  */
-}
-
-/* Chrome specific override */
-@supports (-webkit-appearance:none) and (not (overflow:-webkit-marquee)) and (not (-ms-ime-align:auto)) and (not (-moz-appearance:none)) {
-  @page {
-      margin-top: 0 !important;
-      margin-bottom: 0 !important;
-    }
-  
-    .page {
-      padding-top: 2.5cm !important;
-      padding-bottom: 2cm !important;
-    }
 }
 
 
@@ -100,12 +76,12 @@ h3 {
 }
 
 p {
-  font-size: 0.95em;
+  font-size: 0.93em;
   text-align: justify;
 }
 
 li {
-  font-size: 0.95em;
+  font-size: 0.93em;
   text-align: justify
 }
 
