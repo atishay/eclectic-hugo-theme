@@ -81,8 +81,13 @@ style="background-image:url({{$bg.RelPermalink}})"
 {{ end }}
 {{$title := .title }}
 {{ with .icon }}
+{{ if reflect.IsMap . }}
 {{$title = default $title (findRE "\\w+(?:\\.\\w+)*$" .href)}}
 {{ partialCached "util/icon" (dict "key" .href "size" (default 40 .width) "alt" $title "class" "item-icon") (print . "item-icon") }}
+{{ else }}
+{{$title = default $title (findRE "\\w+(?:\\.\\w+)*$" .)}}
+{{ partialCached "util/icon" (dict "key" . "size" 40 "alt" $title "class" "item-icon") (print . "item-icon") }}
+{{ end }}
 {{ end }}
 {{ with .title }}
     <h2>{{. | markdownify }}</h2>
