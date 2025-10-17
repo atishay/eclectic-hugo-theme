@@ -54,7 +54,7 @@ style="background-image:url({{$bg.RelPermalink}})"
         {{ range $index, $element := $list }}
             {{ $filters.Set $element $index }}
         <label class="sr-only" for="filter-{{$element}}">{{$element}}</label>
-        <input id="filter-{{$element}}" type="radio" role="button" name="{{$title}}" {{if eq $defaultFilter $element}} checked="true"
+        <input id="filter-{{$element}}" type="radio" name="Filter-{{$currentContent.title}}" {{if eq $defaultFilter $element}} checked="true"
     {{end}} class="filter button filter-{{$index}}" value="{{$element}}">
         {{ end }}
     {{ end }}
