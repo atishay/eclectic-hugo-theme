@@ -1,4 +1,5 @@
-{{- $icon := resources.Get (print "image/line-awesome/fa-" $.type ".svg") -}}
+{{- $iconPath := print "image/line-awesome/fa-" $.type ".svg" -}}
+{{- $icon := resources.Get $iconPath -}}
 {{- if $icon -}}
 {{- $icon = $icon | resources.Minify -}}
 {{- $class := "icon" -}}
@@ -7,4 +8,7 @@
 {{- $icon = replace $icon.Content "<svg " $result -}}
 {{- $icon = replace $icon "<path " "<path fill=\"currentColor\" " }}
 {{ $icon | safeHTML }}
+{{- else -}}
+{{- warnf "Icon not found: %s (type: %s)" $iconPath $.type -}}
+<!-- Missing icon: {{ $.type }} -->
 {{- end -}}
