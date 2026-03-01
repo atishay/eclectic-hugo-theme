@@ -134,7 +134,11 @@
 
 //////////////////////////////////////////////////////
 // Intro and about me area with image on the left.
+// At >lg: float layout so body text wraps around oval (shape-outside).
 //////////////////////////////////////////////////////
+$left-image-size: 160px;
+$left-image-height: 200px; /* oval: taller than wide */
+
 .left-image {
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -149,7 +153,6 @@
         grid-area: pic;
         border: 1px solid $divider;
         background: $divider;
-        // OR filter: drop-shadow(0 -5px 10px rgba(0, 0, 0, 0.3));
         width: 100%;
         height: auto;
         border-radius: 50%;
@@ -157,7 +160,7 @@
             box-shadow: 0 0 10px $divider;
         }
     }
-    p {
+    p, .items {
         grid-area: desc;
     }
     h1 {
@@ -171,24 +174,48 @@
         grid-template-columns: 1.5fr 3fr;
     }
     @include media(">lg") {
+        display: block;
+        contain: none;
+        img {
+            float: left;
+            width: $left-image-size;
+            height: $left-image-height;
+            margin: 40px 1.25rem 1rem 0;
+            object-fit: cover;
+            shape-outside: ellipse(50% 50% at 50% 50%);
+            -webkit-shape-outside: ellipse(50% 50% at 50% 50%);
+            shape-margin: 0.6rem;
+            -webkit-shape-margin: 0.6rem;
+        }
         h1, .subtitle {
-            padding: 0;
             margin: 0;
+            padding: 0;
         }
         h1 {
             margin-top: 40px;
+            margin-bottom: 0.75rem;
+        }
+        .subtitle {
+            margin-bottom: 0.75rem;
+        }
+        .items .item {
+            display: block;
         }
     }
     @include media("<=lg") {
         display: block;
-        * {
+        /* don't reset h1/subtitle so .meta defaults (e.g. margin-top 40px) apply */
+        & > *:not(h1):not(.subtitle) {
             margin: 20px 0;
         }
         img {
-        margin: 0 20px 0 0;
-        width: 33%;
-        max-width: 200px;
-        float:left;
+            margin: 0 20px 0 0;
+            width: 33%;
+            max-width: 200px;
+            float: left;
+        }
+        .items {
+            clear: both;
         }
     }
 }
