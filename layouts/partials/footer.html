@@ -17,9 +17,9 @@
             {{- partialCached "util/newsletter" . -}}
         {{- end -}}
         {{$page := .}}
-        {{$count := 100}}
-        {{ if gt .recentCount -1 }}
-        {{ $count = .recentCount }}
+        {{$count := 5}}
+        {{ if isset . "recentcount" }}
+        {{ $count = .recentcount }}
         {{ end }}
         {{- if .menu -}}
         <ul class="sidebar-nav">
