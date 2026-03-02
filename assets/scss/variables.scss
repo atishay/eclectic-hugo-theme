@@ -8,6 +8,7 @@ $breakpoints: (xs: 320px, sm: $sm, md: $md, lg: 992px, xl: 1200px);
 $max-carousal: 2;
 $min-carousal: 10;
 $load-up-duration: 2.0s;
+$transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 :root {
     --max-width: 100vw;
     --header-height: 60px;

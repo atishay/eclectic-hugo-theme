@@ -9,6 +9,23 @@
 }
 .meta {
     scroll-snap-align: start;
+    transition: background-color $transition-smooth, color $transition-smooth;
+    // Subtle divider between sections (::after so it doesn't break flex in .meta.centered)
+    &:not(:last-of-type)::after {
+        content: "";
+        display: block;
+        height: 1px;
+        margin: 0 auto 0;
+        max-width: 60%;
+        background: linear-gradient(
+            to right,
+            transparent 0%,
+            $divider 20%,
+            $divider 80%,
+            transparent 100%
+        );
+        opacity: 0.8;
+    }
     & > :last-child {
         margin-bottom: 40px;
     }
@@ -19,7 +36,7 @@
     contain: content;
     h1, h2, h3, h4 {
         text-align: center;
-        transition: transform 0.2s ease-in;
+        transition: transform 0.2s ease-in, text-shadow $transition-smooth, color $transition-smooth;
         transform-origin: 50% 50%;
         &:hover, .hover {
             text-shadow: 0.5px 0.5px 1px var(--text-color);
@@ -43,11 +60,12 @@
         display: flex;
         flex-direction: column;
         padding: 10px 0 0;
+        transition: transform $transition-smooth;
         .item-cover {
             align-self: center;
             border-radius: 5px;
             background-color: var(--theme-color);
-            transition: border-radius 0.5s ease-in-out;
+            transition: border-radius 0.5s ease-in-out, filter $transition-smooth;
             border: 2px solid transparent;
             box-sizing: content-box; // Using this to maintain image aspect ratios set in code.
             &:hover, &.hover {
@@ -139,6 +157,16 @@
 $left-image-size: 160px;
 $left-image-height: 200px; /* oval: taller than wide */
 
+// Hero: minimal typography tweak for first section only (no layout change)
+body > .meta:first-of-type.left-image {
+    h1 {
+        letter-spacing: 0.02em;
+    }
+    .subtitle {
+        opacity: 0.92;
+    }
+}
+
 .left-image {
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -184,8 +212,8 @@ $left-image-height: 200px; /* oval: taller than wide */
             object-fit: cover;
             shape-outside: ellipse(50% 50% at 50% 50%);
             -webkit-shape-outside: ellipse(50% 50% at 50% 50%);
-            shape-margin: 0.6rem;
-            -webkit-shape-margin: 0.6rem;
+            shape-margin: 0.7rem;
+            -webkit-shape-margin: 0.7rem;
         }
         h1, .subtitle {
             margin: 0;
@@ -297,8 +325,8 @@ $left-image-height: 200px; /* oval: taller than wide */
         padding: calc(2*var(--content-padding));
         background: rgba(var(--background-color-rgb), 0.9);
         border-radius: 5px;
-
         box-shadow: 0 0 2px #ddd;
+        transition: background-color $transition-smooth, box-shadow $transition-smooth;
         &:hover {
             background: var(--background-color);
         }
@@ -454,10 +482,25 @@ $left-image-height: 200px; /* oval: taller than wide */
     padding-right: 0;
     overflow: hidden;
     margin-bottom: 20px;
+    // Fade at edges for carousel
     .items {
         display: flex;
         grid-column-gap: 0;
         grid-row-gap: 0;
+        mask-image: linear-gradient(
+            to right,
+            transparent 0,
+            black 8%,
+            black 92%,
+            transparent 100%
+        );
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent 0,
+            black 8%,
+            black 92%,
+            transparent 100%
+        );
     }
     &:nth-child(2n) {
             box-shadow: 400px 0 0 20px $shade,
@@ -781,6 +824,27 @@ $left-image-height: 200px; /* oval: taller than wide */
     }
 }
 
+// Dark mode: brighter text in Contact section for readability
+.dark .meta.centered {
+    color: rgb(245, 242, 238);
+    .item,
+    h1, h2, h3, h4,
+    .subtitle,
+    p, li, span {
+        color: inherit;
+    }
+    a {
+        color: var(--theme-color);
+        &:hover {
+            color: var(--theme-color);
+            filter: brightness(1.1);
+        }
+    }
+    &>.attribution {
+        color: rgba(255, 250, 245, 0.9);
+    }
+}
+
 ///////////////////////////////////////
 // Blog section
 ///////////////////////////////////////
@@ -995,9 +1059,9 @@ $left-image-height: 200px; /* oval: taller than wide */
     z-index: 99;
     margin: 40px auto;
     transition: transform .5s ease-in-out, box-shadow .35s ease-in-out;
-    
+
     }
-    
+
     .book:hover, .book.hover {
         transform: translateX(111px);
     }
@@ -1171,7 +1235,7 @@ $left-image-height: 200px; /* oval: taller than wide */
     justify-content: center;
 }
 
-.book:hover, 
+.book:hover,
 .book.hover {
     .front {
     transform: rotateY(-160deg) scale(1.1);
@@ -1232,7 +1296,7 @@ h2 {
 h3 {
     animation: fade-up-item-3 $load-up-duration ease-in-out;
 }
-.content.visible, .content.visible ~small {    
+.content.visible, .content.visible ~small {
     animation: fade-up-item-1 $load-up-duration ease-in-out;
 }
 .content.visible~.links {
