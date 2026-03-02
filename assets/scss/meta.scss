@@ -482,25 +482,11 @@ body > .meta:first-of-type.left-image {
     padding-right: 0;
     overflow: hidden;
     margin-bottom: 20px;
-    // Fade at edges for carousel
+    min-height: 500px;
     .items {
         display: flex;
         grid-column-gap: 0;
         grid-row-gap: 0;
-        mask-image: linear-gradient(
-            to right,
-            transparent 0,
-            black 8%,
-            black 92%,
-            transparent 100%
-        );
-        -webkit-mask-image: linear-gradient(
-            to right,
-            transparent 0,
-            black 8%,
-            black 92%,
-            transparent 100%
-        );
     }
     &:nth-child(2n) {
             box-shadow: 400px 0 0 20px $shade,
