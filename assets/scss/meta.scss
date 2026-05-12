@@ -33,7 +33,6 @@
         margin-top: 40px;
     }
     @include container;
-    contain: content;
     h1, h2, h3, h4 {
         text-align: center;
         transition: transform 0.2s ease-in, text-shadow $transition-smooth, color $transition-smooth;

@@ -128,7 +128,12 @@ style="background-image:url({{$bg.RelPermalink}})"
 {{ with .links}}
         <div class="links">
             {{ range . }}
+                {{ if .video }}
+                {{ $popupID := .video | urlize }}
+                <a href="#{{ $popupID }}" class="button-small">
+                {{ else }}
                 <a href="{{.href}}" class="button-small" target="_blank" rel="noopener">
+                {{ end }}
                     {{ with .icon }}
                     {{ partialCached "util/icon" (dict "key" . "size" 18 "class" "link-icon" "alt" $title) (print . "link-icon") }}
                     {{ end }}
@@ -136,6 +141,19 @@ style="background-image:url({{$bg.RelPermalink}})"
                 </a>
             {{ end }}
         </div>
+        {{ range . }}
+            {{ if .video }}
+            {{ $popupID := .video | urlize }}
+            <div id="{{ $popupID }}" class="video-popup-overlay">
+                <div class="video-popup-inner">
+                    <a href="#" class="video-popup-close" aria-label="Close">&#x2715;</a>
+                    <video controls>
+                        <source src="{{.video}}" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            {{ end }}
+        {{ end }}
 {{ end }}
             </div>
             {{ end }}
