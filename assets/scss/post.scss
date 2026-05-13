@@ -48,11 +48,9 @@
             // Needed for firefox
             // https://stackoverflow.com/questions/43311943/
             min-width: 0;
-            contain: content;
         }
         aside {
             grid-area: aside;
-            contain: content;
         }
         .buttons {
             grid-area: buttons;

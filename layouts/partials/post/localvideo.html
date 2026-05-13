@@ -1,0 +1,45 @@
+{{ $parts := .parts }}
+{{ $hasLocal := and $parts (gt (len $parts) 0) (index $parts 0) }}
+{{ $thumbSrc := "" }}
+{{ with .page }}
+    {{ with .Resources.GetMatch "thumb.*" }}
+        {{ $img := .Fill "800x450 Center" }}
+        {{ $thumbSrc = $img.RelPermalink }}
+    {{ end }}
+{{ end }}
+{{ if and (not $thumbSrc) .thumbnail }}
+    {{ $thumbSrc = .thumbnail }}
+{{ end }}
+<h2>Video</h2>
+<a href="#post-video-popup" class="video-thumb-link" aria-label="Watch video">
+    {{ if $thumbSrc }}
+    <img src="{{ $thumbSrc }}" alt="Video thumbnail" class="video-thumb-img">
+    {{ end }}
+    <span class="video-thumb-play">&#9654;</span>
+</a>
+<div id="post-video-popup" class="video-popup-overlay">
+    <div class="video-popup-inner">
+        <a href="#" class="video-popup-close" aria-label="Close">&#x2715;</a>
+        {{ if $hasLocal }}
+        <video controls
+            data-parts="{{ $parts | jsonify }}"
+            data-current="0"
+            {{ with .youtube }}data-youtube="{{ . }}"{{ end }}>
+            <source src="{{ index $parts 0 }}" type="video/mp4">
+        </video>
+        {{ if gt (len $parts) 1 }}
+        <div class="video-parts">
+            {{ range $i, $p := $parts }}
+            <button class="video-part{{ if eq $i 0 }} active{{ end }}" data-index="{{ $i }}">Part {{ add $i 1 }}</button>
+            {{ end }}
+        </div>
+        {{ end }}
+        {{ else }}
+        <div class="video-iframe-wrap">
+            {{ if .youtube }}
+            <iframe title="Video" src="https://www.youtube-nocookie.com/embed/{{ .youtube }}?autoplay=1" allowfullscreen allow="autoplay"></iframe>
+            {{ end }}
+        </div>
+        {{ end }}
+    </div>
+</div>

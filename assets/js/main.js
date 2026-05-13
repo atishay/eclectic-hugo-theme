@@ -446,6 +446,68 @@ new Search();
   ///////////////////////////////////////////
   // Intersection Observer for animations
   ///////////////////////////////////////////
+  // Pause video when popup is closed via hash change
+  window.addEventListener('hashchange', () => {
+    document.querySelectorAll('.video-popup-overlay video').forEach(v => {
+      if (!v.closest('.video-popup-overlay:target')) {
+        v.pause();
+      }
+    });
+  });
+
+  // On popup open: check if first video part exists; fall back to YouTube iframe if 404
+  document.querySelectorAll('.video-popup-overlay').forEach(overlay => {
+    let checked = false;
+    const onTarget = () => {
+      if (checked || overlay !== document.querySelector(':target')) return;
+      checked = true;
+      const video = overlay.querySelector('video[data-parts]');
+      if (!video) return;
+      const parts = JSON.parse(video.dataset.parts);
+      if (!parts.length) return;
+      fetch(parts[0], { method: 'HEAD' }).then(r => {
+        if (r.ok) return;
+        const ytId = video.dataset.youtube;
+        if (!ytId) return;
+        const wrap = document.createElement('div');
+        wrap.className = 'video-iframe-wrap';
+        wrap.innerHTML = `<iframe title="Video" src="https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1" allowfullscreen allow="autoplay"></iframe>`;
+        const inner = video.closest('.video-popup-inner');
+        inner.querySelector('.video-parts')?.remove();
+        video.replaceWith(wrap);
+      }).catch(() => {});
+    };
+    window.addEventListener('hashchange', onTarget);
+    onTarget();
+  });
+
+  // N-part video: pagination buttons + auto-advance on ended
+  document.querySelectorAll('.video-popup-inner video[data-parts]').forEach(video => {
+    const parts = JSON.parse(video.dataset.parts);
+    if (parts.length < 2) return;
+
+    const btns = video.parentElement.querySelectorAll('.video-part');
+
+    function loadPart(index) {
+      if (index < 0 || index >= parts.length) return;
+      video.dataset.current = index;
+      video.src = parts[index];
+      video.load();
+      video.play();
+      btns.forEach((b, i) => b.classList.toggle('active', i === index));
+    }
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => loadPart(Number(btn.dataset.index)));
+    });
+
+    video.addEventListener('ended', () => {
+      const next = Number(video.dataset.current) + 1;
+      if (next < parts.length) loadPart(next);
+    });
+  });
+
+  ///////////////////////////////////////////
   // Scroll animations for iPad and bigger
   if (window.innerWidth >= 768) {
     const observer = new IntersectionObserver((entries) => {

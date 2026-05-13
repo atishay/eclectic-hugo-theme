@@ -14,11 +14,20 @@
 <h1>{{.Title}}</h1>
 {{- partial "util/heading-anchors.html" .Content -}}
 {{- $title := default .Title "" -}}
-{{- with .Params.youtube -}}
+{{- with .Params.localvideo -}}
+{{- $parts := cond (reflect.IsSlice .) . (slice .) -}}
+{{- partial "post/localvideo.html" (dict "parts" $parts "page" $ "youtube" $.Params.youtube) -}}
+{{- else -}}
+{{- with $.Params.youtube -}}
+{{- if (or $.Params.thumbnail ($.Page.Resources.GetMatch "thumb.*")) -}}
+{{- partial "post/localvideo.html" (dict "parts" slice "page" $ "youtube" .) -}}
+{{- else -}}
 <h2>Video</h2>
 <p>Here is the video:
 {{- partial "post/youtube.html" (dict "id" . "title" $title) -}}
 </p>
+{{- end -}}
+{{- end -}}
 {{- end -}}
 </main>
 {{- partial "post/sidebar.html" . -}}

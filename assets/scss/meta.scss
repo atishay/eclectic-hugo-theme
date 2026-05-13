@@ -202,7 +202,6 @@ body > .meta:first-of-type.left-image {
     }
     @include media(">lg") {
         display: block;
-        contain: none;
         img {
             float: left;
             width: $left-image-size;

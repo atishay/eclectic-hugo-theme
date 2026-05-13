@@ -128,17 +128,31 @@ style="background-image:url({{$bg.RelPermalink}})"
 {{ with .links}}
         <div class="links">
             {{ range . }}
-                {{ if .video }}
-                {{ $popupID := .video | urlize }}
+                {{ $popupID := "" }}
+                {{ if .video }}{{ $popupID = .video | urlize }}{{ end }}
+                {{ if .youtube }}{{ $popupID = print "yt-" .youtube }}{{ end }}
+                {{ if .vimeo }}{{ $popupID = print "vm-" .vimeo }}{{ end }}
+                {{ if and $popupID .thumbnail }}
+                {{ $thumbImg := (partial "util/image.html" (dict "Page" $top "image" .thumbnail)).Fill "534x360 Center" }}
+                <a href="#{{ $popupID }}" class="video-thumb-link" aria-label="Watch video">
+                    <img src="{{ $thumbImg.RelPermalink }}" alt="{{ $title }} thumbnail" class="video-thumb-img">
+                    <span class="video-thumb-play">&#9654;</span>
+                </a>
+                {{ else if $popupID }}
                 <a href="#{{ $popupID }}" class="button-small">
-                {{ else }}
-                <a href="{{.href}}" class="button-small" target="_blank" rel="noopener">
-                {{ end }}
                     {{ with .icon }}
                     {{ partialCached "util/icon" (dict "key" . "size" 18 "class" "link-icon" "alt" $title) (print . "link-icon") }}
                     {{ end }}
                     <span class="link-text">{{.title | markdownify}}</span>
                 </a>
+                {{ else }}
+                <a href="{{.href}}" class="button-small" target="_blank" rel="noopener">
+                    {{ with .icon }}
+                    {{ partialCached "util/icon" (dict "key" . "size" 18 "class" "link-icon" "alt" $title) (print . "link-icon") }}
+                    {{ end }}
+                    <span class="link-text">{{.title | markdownify}}</span>
+                </a>
+                {{ end }}
             {{ end }}
         </div>
         {{ range . }}
@@ -147,9 +161,39 @@ style="background-image:url({{$bg.RelPermalink}})"
             <div id="{{ $popupID }}" class="video-popup-overlay">
                 <div class="video-popup-inner">
                     <a href="#" class="video-popup-close" aria-label="Close">&#x2715;</a>
-                    <video controls>
-                        <source src="{{.video}}" type="video/mp4">
+                    {{ $parts := cond (reflect.IsSlice .video) .video (slice .video) }}
+                    <video controls data-parts="{{ $parts | jsonify }}" data-current="0">
+                        <source src="{{ index $parts 0 }}" type="video/mp4">
                     </video>
+                    {{ if gt (len $parts) 1 }}
+                    <div class="video-parts">
+                        {{ range $i, $p := $parts }}
+                        <button class="video-part{{ if eq $i 0 }} active{{ end }}" data-index="{{ $i }}">Part {{ add $i 1 }}</button>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+            {{ end }}
+            {{ if .youtube }}
+            {{ $popupID := print "yt-" .youtube }}
+            <div id="{{ $popupID }}" class="video-popup-overlay">
+                <div class="video-popup-inner">
+                    <a href="#" class="video-popup-close" aria-label="Close">&#x2715;</a>
+                    <div class="video-iframe-wrap">
+                        <iframe title="Video" src="https://www.youtube-nocookie.com/embed/{{ .youtube }}?autoplay=1" allowfullscreen allow="autoplay"></iframe>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+            {{ if .vimeo }}
+            {{ $popupID := print "vm-" .vimeo }}
+            <div id="{{ $popupID }}" class="video-popup-overlay">
+                <div class="video-popup-inner">
+                    <a href="#" class="video-popup-close" aria-label="Close">&#x2715;</a>
+                    <div class="video-iframe-wrap">
+                        <iframe title="Video" src="https://player.vimeo.com/video/{{ .vimeo }}?autoplay=1" allowfullscreen allow="autoplay"></iframe>
+                    </div>
                 </div>
             </div>
             {{ end }}
