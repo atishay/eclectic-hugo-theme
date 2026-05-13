@@ -446,12 +446,18 @@ new Search();
   ///////////////////////////////////////////
   // Intersection Observer for animations
   ///////////////////////////////////////////
-  // Pause video when popup is closed via hash change
+  // Pause video / stop iframe when popup is closed via hash change
   window.addEventListener('hashchange', () => {
-    document.querySelectorAll('.video-popup-overlay video').forEach(v => {
-      if (!v.closest('.video-popup-overlay:target')) {
-        v.pause();
-      }
+    document.querySelectorAll('.video-popup-overlay').forEach(overlay => {
+      if (overlay.matches(':target')) return;
+      overlay.querySelectorAll('video').forEach(v => v.pause());
+      overlay.querySelectorAll('iframe').forEach(iframe => {
+        iframe.dataset.src = iframe.dataset.src || iframe.src;
+        iframe.src = '';
+      });
+    });
+    document.querySelectorAll('.video-popup-overlay:target iframe').forEach(iframe => {
+      if (!iframe.src && iframe.dataset.src) iframe.src = iframe.dataset.src;
     });
   });
 
