@@ -156,16 +156,21 @@
 $left-image-size: 160px;
 $left-image-height: 200px; /* oval: taller than wide */
 
-// Hero: full-viewport first section with animated mesh gradient background
+// Hero: full-viewport first section with vibrant mesh + lattice + noise
 @keyframes mesh-breathe {
-  0%, 100% { opacity: 0.7; filter: hue-rotate(0deg); }
-  50% { opacity: 1; filter: hue-rotate(8deg); }
+  0%, 100% { opacity: 0.92; filter: hue-rotate(0deg); }
+  50% { opacity: 1; filter: hue-rotate(3deg); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
 }
 body > .meta:first-of-type.left-image {
     min-height: 100dvh;
-    align-content: center;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
     &::before {
       content: "";
       position: absolute;
@@ -173,10 +178,15 @@ body > .meta:first-of-type.left-image {
       z-index: 0;
       pointer-events: none;
       background:
-        radial-gradient(ellipse 80% 60% at 15% 30%, hsl(var(--h), 40%, 90%), transparent 70%),
-        radial-gradient(ellipse 60% 80% at 70% 55%, hsl(var(--hc), 35%, 85%), transparent 70%);
-      animation: mesh-breathe 20s ease-in-out infinite;
+        radial-gradient(ellipse 85% 55% at 10% 25%, hsl(var(--h), 95%, 72%), transparent 50%),
+        radial-gradient(ellipse 45% 65% at 85% 30%, hsl(var(--ha1), 90%, 68%), transparent 50%),
+        radial-gradient(ellipse 40% 55% at 40% 80%, hsl(var(--hc), 85%, 65%), transparent 55%);
+      animation: mesh-breathe 14s ease-in-out infinite;
     }
+    // Hex lattice pattern overlay
+    background-image:
+      url("data:image/svg+xml,%3Csvg width='60' height='52' viewBox='0 0 60 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0 L60 15 L60 37 L30 52 L0 37 L0 15 Z' fill='none' stroke='hsl(var(--h), 80%, 55%)' stroke-width='0.5' stroke-opacity='0.08'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg width='256' height='256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     & > * { position: relative; z-index: 1; }
     h1 {
         letter-spacing: 0.02em;
@@ -184,6 +194,19 @@ body > .meta:first-of-type.left-image {
     .subtitle {
         opacity: 0.92;
     }
+}
+
+// Dark mode hero
+.dark body > .meta:first-of-type.left-image {
+    &::before {
+      background:
+        radial-gradient(ellipse 85% 55% at 10% 25%, hsl(var(--h), 70%, 28%), transparent 50%),
+        radial-gradient(ellipse 45% 65% at 85% 30%, hsl(var(--ha1), 65%, 22%), transparent 50%),
+        radial-gradient(ellipse 40% 55% at 40% 80%, hsl(var(--hc), 60%, 20%), transparent 55%);
+    }
+    background-image:
+      url("data:image/svg+xml,%3Csvg width='60' height='52' viewBox='0 0 60 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0 L60 15 L60 37 L30 52 L0 37 L0 15 Z' fill='none' stroke='hsl(var(--h), 60%, 40%)' stroke-width='0.5' stroke-opacity='0.06'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg width='256' height='256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
 }
 
 .left-image {
