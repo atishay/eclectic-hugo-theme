@@ -490,20 +490,26 @@ new Search();
   ///////////////////////////////////////////
   // Intersection Observer for animations
   ///////////////////////////////////////////
-  // Pause video / stop iframe when popup is closed via hash change
-  window.addEventListener('hashchange', () => {
+  // Load iframe src from data-src when popup opens; clear src when it closes
+  function syncPopupIframes() {
     document.querySelectorAll('.video-popup-overlay').forEach(overlay => {
-      if (overlay.matches(':target')) return;
-      overlay.querySelectorAll('video').forEach(v => v.pause());
-      overlay.querySelectorAll('iframe').forEach(iframe => {
-        iframe.dataset.src = iframe.dataset.src || iframe.src;
-        iframe.src = '';
-      });
+      if (overlay.matches(':target')) {
+        overlay.querySelectorAll('iframe').forEach(iframe => {
+          if (!iframe.src && iframe.dataset.src) iframe.src = iframe.dataset.src;
+        });
+      } else {
+        overlay.querySelectorAll('video').forEach(v => v.pause());
+        overlay.querySelectorAll('iframe').forEach(iframe => {
+          if (iframe.src) {
+            iframe.dataset.src = iframe.dataset.src || iframe.src;
+            iframe.src = '';
+          }
+        });
+      }
     });
-    document.querySelectorAll('.video-popup-overlay:target iframe').forEach(iframe => {
-      if (!iframe.src && iframe.dataset.src) iframe.src = iframe.dataset.src;
-    });
-  });
+  }
+  window.addEventListener('hashchange', syncPopupIframes);
+  syncPopupIframes();
 
   // On popup open: check if first video part exists; fall back to YouTube iframe if 404
   document.querySelectorAll('.video-popup-overlay').forEach(overlay => {
