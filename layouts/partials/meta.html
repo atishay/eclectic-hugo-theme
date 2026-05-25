@@ -155,7 +155,12 @@ style="background-image:url({{$bg.RelPermalink}})"
                 {{ end }}
             {{ end }}
         </div>
-        {{ range . }}
+{{ end }}
+            </div>
+            {{ end }}
+        </div>
+        {{ range $currentContent.items }}
+        {{ range .links }}
             {{ if .video }}
             {{ $popupID := .video | urlize }}
             <div id="{{ $popupID }}" class="video-popup-overlay">
@@ -198,10 +203,7 @@ style="background-image:url({{$bg.RelPermalink}})"
             </div>
             {{ end }}
         {{ end }}
-{{ end }}
-            </div>
-            {{ end }}
-        </div>
+        {{ end }}
     {{ end }}
 {{ with .attribution }}
 <small class="attribution">{{. |markdownify}}</small>
