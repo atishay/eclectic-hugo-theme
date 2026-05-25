@@ -132,13 +132,7 @@ style="background-image:url({{$bg.RelPermalink}})"
                 {{ if .video }}{{ $popupID = .video | urlize }}{{ end }}
                 {{ if .youtube }}{{ $popupID = print "yt-" .youtube }}{{ end }}
                 {{ if .vimeo }}{{ $popupID = print "vm-" .vimeo }}{{ end }}
-                {{ if and $popupID .thumbnail }}
-                {{ $thumbImg := (partial "util/image.html" (dict "Page" $top "image" .thumbnail)).Fill "534x360 Center" }}
-                <a href="#{{ $popupID }}" class="video-thumb-link" aria-label="Watch video">
-                    <img src="{{ $thumbImg.RelPermalink }}" alt="{{ $title }} thumbnail" class="video-thumb-img">
-                    <span class="video-thumb-play">&#9654;</span>
-                </a>
-                {{ else if $popupID }}
+                {{ if $popupID }}
                 <a href="#{{ $popupID }}" class="button-small">
                     {{ with .icon }}
                     {{ partialCached "util/icon" (dict "key" . "size" 18 "class" "link-icon" "alt" $title) (print . "link-icon") }}
