@@ -156,10 +156,8 @@
 $left-image-size: 160px;
 $left-image-height: 200px; /* oval: taller than wide */
 
-// Hero: full-viewport first section with typography flair
+// Hero: minimal typography tweak for first section only (no layout change)
 body > .meta:first-of-type.left-image {
-    min-height: 100dvh;
-    align-content: center;
     h1 {
         letter-spacing: 0.02em;
     }
