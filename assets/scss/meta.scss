@@ -156,10 +156,28 @@
 $left-image-size: 160px;
 $left-image-height: 200px; /* oval: taller than wide */
 
-// Hero: full-viewport first section with typography flair
+// Hero: full-viewport first section with animated mesh gradient background
+@keyframes mesh-breathe {
+  0%, 100% { opacity: 0.7; filter: hue-rotate(0deg); }
+  50% { opacity: 1; filter: hue-rotate(8deg); }
+}
 body > .meta:first-of-type.left-image {
     min-height: 100dvh;
     align-content: center;
+    position: relative;
+    overflow: hidden;
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 15% 30%, hsl(var(--h), 40%, 90%), transparent 70%),
+        radial-gradient(ellipse 60% 80% at 70% 55%, hsl(var(--hc), 35%, 85%), transparent 70%);
+      animation: mesh-breathe 20s ease-in-out infinite;
+    }
+    & > * { position: relative; z-index: 1; }
     h1 {
         letter-spacing: 0.02em;
     }
