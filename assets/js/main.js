@@ -179,10 +179,48 @@
   // Color Picker
   ///////////////////////////////////////////
   let color = window.localStorage.color || '{{- $.Site.Params.color -}}';
+  // HSL color system: derive hues for gradients, accents, complements
+  function hexToHsl(hex) {
+    var h = hex.replace('#', '');
+    if (h.length === 3) { h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2]; }
+    var r = parseInt(h.substring(0,2), 16) / 255;
+    var g = parseInt(h.substring(2,4), 16) / 255;
+    var b = parseInt(h.substring(4,6), 16) / 255;
+    var max = Math.max(r,g,b), min = Math.min(r,g,b);
+    var hDeg = 0, s = 0, l = (max + min) / 2;
+    if (max !== min) {
+      var d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: hDeg = ((g - b) / d + (g < b ? 6 : 0)); break;
+        case g: hDeg = ((b - r) / d + 2); break;
+        case b: hDeg = ((r - g) / d + 4); break;
+      }
+      hDeg = Math.round(hDeg * 60);
+    }
+    s = Math.round(s * 100);
+    l = Math.round(l * 100);
+    return { h: hDeg, s: s, l: l };
+  }
+
+  function applyHslTheme(hex) {
+    var hsl = hexToHsl(hex);
+    var root = document.documentElement.style;
+    root.setProperty('--h', hsl.h);
+    root.setProperty('--s', hsl.s);
+    root.setProperty('--l', hsl.l);
+    root.setProperty('--ha1', (hsl.h + 30) % 360);
+    root.setProperty('--ha2', (hsl.h + 335) % 360);
+    root.setProperty('--hc', (hsl.h + 180) % 360);
+    root.setProperty('--ht1', (hsl.h + 120) % 360);
+    root.setProperty('--ht2', (hsl.h + 240) % 360);
+  }
+
   function setColor(hex) {
     color = hex;
     window.localStorage.color = color;
     document.documentElement.style.setProperty("--theme-color", hex);
+    applyHslTheme(hex);
   }
   document.querySelectorAll('.theme-choice').forEach(s => {
     s.addEventListener('click', e => {
@@ -204,6 +242,12 @@
       })
     });
   }
+
+  // Apply HSL on page load (inline script in head runs first, but re-apply for safety)
+  document.addEventListener('DOMContentLoaded', function() {
+    var c = window.localStorage.color || '{{- $.Site.Params.color -}}';
+    applyHslTheme(c);
+  });
 
   const checkbox = document.querySelector('#color-switch');
   if (checkbox) {

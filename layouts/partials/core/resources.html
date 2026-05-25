@@ -39,9 +39,22 @@
 {{- $sw = $sw | resources.ExecuteAsTemplate "sw.js" (dict "page" . "res" $res) | resources.Minify -}}
 <!-- {{- $sw.RelPermalink -}} -->
 <script>
-  if (window.localStorage.color) {
-    document.documentElement.style.setProperty("--theme-color", window.localStorage.color);
-  }
+  (function(){
+    var hex = window.localStorage.color || '{{- $.Site.Params.color | default "#f92b3f" -}}';
+    document.documentElement.style.setProperty('--theme-color', hex);
+    // HSL color system
+    var h = hex.replace('#','');
+    if(h.length===3) h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    var r=parseInt(h.substring(0,2),16)/255,g=parseInt(h.substring(2,4),16)/255,b=parseInt(h.substring(4,6),16)/255;
+    var max=Math.max(r,g,b),min=Math.min(r,g,b),hDeg=0,sVal=0,lVal=(max+min)/2;
+    if(max!==min){var d=max-min;sVal=lVal>0.5?d/(2-max-min):d/(max+min);
+      switch(max){case r:hDeg=((g-b)/d+(g<b?6:0));break;case g:hDeg=((b-r)/d+2);break;case b:hDeg=((r-g)/d+4);break;}
+      hDeg=Math.round(hDeg*60);}sVal=Math.round(sVal*100);lVal=Math.round(lVal*100);
+    var s=document.documentElement.style;
+    s.setProperty('--h',hDeg);s.setProperty('--s',sVal);s.setProperty('--l',lVal);
+    s.setProperty('--ha1',(hDeg+30)%360);s.setProperty('--ha2',(hDeg+335)%360);
+    s.setProperty('--hc',(hDeg+180)%360);s.setProperty('--ht1',(hDeg+120)%360);s.setProperty('--ht2',(hDeg+240)%360);
+  })();
   if(window.localStorage.dark === "true") {
     document.documentElement.classList.add("dark");
   }

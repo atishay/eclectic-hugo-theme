@@ -21,6 +21,24 @@ $transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     --heading-color: #444;
     --shade-color: #f6f6f6;
     --hover-color: #111;
+    /* HSL color system — JS updates these on color picker change */
+    --h: 355;
+    --s: 94;
+    --l: 57;
+    --ha1: 25;
+    --ha2: 330;
+    --hc: 175;
+    --ht1: 115;
+    --ht2: 235;
+}
+
+/* Gradient presets using HSL system */
+:root {
+  --g-accent: linear-gradient(135deg, hsl(var(--h), 90%, 55%), hsl(var(--ha1), 85%, 48%));
+  --g-triadic: linear-gradient(135deg, hsl(var(--ht1), 80%, 55%), hsl(var(--ht2), 80%, 55%));
+  --g-cool: linear-gradient(135deg, #667eea, #764ba2);
+  --g-warm: linear-gradient(135deg, #f093fb, #f5576c);
+  --g-ocean: linear-gradient(135deg, #4facfe, #00f2fe);
 }
 $divider: rgba(var(--text-color-rgb), 0.1);
 $shade: var(--shade-color);
