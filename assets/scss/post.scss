@@ -1,5 +1,17 @@
 @import "triangle.scss";
 
+/* MathML / KaTeX styling for transform.ToMath */
+math, .katex { font-size: 1.1em; }
+math[display="block"], .katex-display {
+  display: block;
+  margin: 1em 0;
+  text-align: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.dark math { color: #ddd; }
+
+
 .post {
     z-index: 1;
     margin: calc(var(--header-height)/2);
