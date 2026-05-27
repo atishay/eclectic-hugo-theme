@@ -163,6 +163,19 @@ body > .meta:first-of-type.left-image {
     position: relative;
     padding-top: 80px !important;
     padding-bottom: 80px !important;
+
+    // At large screens: scale fonts and push content toward vertical center
+    @include media(">lg") {
+        // ~350px is approx content block height; center it within 100dvh minus header
+        padding-top: max(80px, calc(50dvh - 280px)) !important;
+        h1 {
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            margin-top: 0 !important;
+        }
+        .subtitle {
+            font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+        }
+    }
     // Animated diagonal gradient: two overlapping color stops shifting position
     background-color: var(--background-color) !important;
     background-image:
@@ -175,7 +188,10 @@ body > .meta:first-of-type.left-image {
 
     h1 {
         letter-spacing: 0.02em;
-        padding-bottom: 0.1em; // prevent gradient-clip descender cutoff
+        line-height: 1.3;
+        // Padding-bottom extends the painted background region so gradient-clip
+        // doesn't cut off the bottom of the letterforms (WebKit quirk)
+        padding-bottom: 0.25em;
         background: linear-gradient(135deg,
             hsl(var(--h), 80%, 40%),
             hsl(var(--ha1), 75%, 36%));
