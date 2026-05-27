@@ -247,6 +247,21 @@
   document.addEventListener('DOMContentLoaded', function() {
     var c = window.localStorage.color || '{{- $.Site.Params.color -}}';
     applyHslTheme(c);
+
+    // Hero scroll chevron — inject into first .left-image section
+    const heroSection = document.querySelector('body > .meta.left-image:first-of-type');
+    if (heroSection) {
+      const hint = document.createElement('div');
+      hint.className = 'hero-scroll-hint';
+      hint.setAttribute('aria-hidden', 'true');
+      heroSection.appendChild(hint);
+
+      // Hide chevron once user scrolls past hero
+      const io = new IntersectionObserver(([entry]) => {
+        heroSection.classList.toggle('scrolled-past', !entry.isIntersecting);
+      }, { threshold: 0.1 });
+      io.observe(heroSection);
+    }
   });
 
   const checkbox = document.querySelector('#color-switch');

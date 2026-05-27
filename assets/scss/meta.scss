@@ -156,13 +156,109 @@
 $left-image-size: 160px;
 $left-image-height: 200px; /* oval: taller than wide */
 
-// Hero: minimal typography tweak for first section only (no layout change)
+// Hero: full-viewport first section
+// Uses !important to beat the .meta:nth-child(2n) background rule.
 body > .meta:first-of-type.left-image {
+    min-height: 100dvh;
+    position: relative;
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+    // Animated diagonal gradient: two overlapping color stops shifting position
+    background-color: var(--background-color) !important;
+    background-image:
+        radial-gradient(ellipse 100% 80% at 0% 0%, hsl(var(--h), 60%, 92%) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 100% at 100% 100%, hsl(var(--hc), 50%, 90%) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 60% at 50% 50%, hsl(var(--ha1), 45%, 95%) 0%, transparent 65%) !important;
+    background-size: 100% 100% !important;
+    animation: hero-orbs-drift 20s ease-in-out infinite alternate;
+    transition: color $transition-smooth !important;
+
     h1 {
         letter-spacing: 0.02em;
+        padding-bottom: 0.1em; // prevent gradient-clip descender cutoff
+        background: linear-gradient(135deg,
+            hsl(var(--h), 80%, 40%),
+            hsl(var(--ha1), 75%, 36%));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+        opacity: 0.85;
+        color: hsl(var(--h), 20%, 38%);
+    }
+
+    img {
+        animation: hero-blob-morph 14s ease-in-out infinite;
+        box-shadow: 0 16px 48px hsla(var(--h), 50%, 40%, 0.18);
+    }
+
+    // Scroll hint chevron — injected by JS, position: absolute so it's out of grid flow
+    .hero-scroll-hint {
+        position: absolute;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        opacity: 0.35;
+        animation: hero-chevron-bounce 2.2s ease-in-out infinite;
+        transition: opacity 0.4s;
+        pointer-events: none;
+        font-size: 22px;
+        color: hsl(var(--h), 40%, 45%);
+        &::after {
+            content: "↓";
+            display: block;
+        }
+    }
+    &.scrolled-past .hero-scroll-hint {
+        opacity: 0;
+    }
+}
+
+.dark body > .meta:first-of-type.left-image {
+    background-image:
+        radial-gradient(ellipse 100% 80% at 0% 0%, hsl(var(--h), 40%, 14%) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 100% at 100% 100%, hsl(var(--hc), 30%, 11%) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 60% at 50% 50%, hsl(var(--ha1), 35%, 13%) 0%, transparent 65%) !important;
+
+    h1 {
+        background: linear-gradient(135deg,
+            hsl(var(--h), 75%, 65%),
+            hsl(var(--ha1), 70%, 60%));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
     .subtitle {
-        opacity: 0.92;
+        color: hsl(var(--h), 15%, 65%);
+    }
+}
+
+@keyframes hero-orbs-drift {
+    0%   { background-position: 0% 0%, 100% 100%, 50% 50%; }
+    33%  { background-position: 5% 10%, 95% 90%, 45% 55%; }
+    66%  { background-position: 10% 5%, 90% 95%, 55% 45%; }
+    100% { background-position: 3% 8%, 97% 92%, 48% 52%; }
+}
+@keyframes hero-blob-morph {
+    0%, 100% { border-radius: 50%; }
+    25%       { border-radius: 40% 60% 65% 35% / 45% 40% 60% 55%; }
+    50%       { border-radius: 55% 45% 40% 60% / 55% 60% 40% 45%; }
+    75%       { border-radius: 45% 55% 55% 45% / 35% 55% 45% 65%; }
+}
+@keyframes hero-chevron-bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body > .meta:first-of-type.left-image,
+    body > .meta:first-of-type.left-image h1,
+    body > .meta:first-of-type.left-image img,
+    body > .meta:first-of-type.left-image .hero-scroll-hint {
+        animation: none !important;
     }
 }
 
@@ -175,6 +271,7 @@ body > .meta:first-of-type.left-image {
     "pic title"
     "pic subtitle"
     "pic desc";
+    align-content: center;
     img {
         margin: 40px 0;
         grid-area: pic;
