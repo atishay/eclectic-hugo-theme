@@ -10,22 +10,6 @@
 .meta {
     scroll-snap-align: start;
     transition: background-color $transition-smooth, color $transition-smooth;
-    // Subtle divider between sections (::after so it doesn't break flex in .meta.centered)
-    &:not(:last-of-type)::after {
-        content: "";
-        display: block;
-        height: 1px;
-        margin: 0 auto 0;
-        max-width: 60%;
-        background: linear-gradient(
-            to right,
-            transparent 0%,
-            $divider 20%,
-            $divider 80%,
-            transparent 100%
-        );
-        opacity: 0.8;
-    }
     & > :last-child {
         margin-bottom: 40px;
     }
@@ -159,15 +143,12 @@ $left-image-height: 200px; /* oval: taller than wide */
 // Hero: full-viewport first section
 // Uses !important to beat the .meta:nth-child(2n) background rule.
 body > .meta:first-of-type.left-image {
-    min-height: 100dvh;
     position: relative;
     padding-top: 80px !important;
     padding-bottom: 80px !important;
 
-    // At large screens: scale fonts and push content toward vertical center
+    // At large screens: scale fonts
     @include media(">lg") {
-        // ~350px is approx content block height; center it within 100dvh minus header
-        padding-top: unquote("max(80px, calc(50dvh - 280px))") !important;
         h1 {
             font-size: clamp(2rem, 3.5vw, 3rem);
             margin-top: 0 !important;
@@ -176,34 +157,39 @@ body > .meta:first-of-type.left-image {
             font-size: clamp(0.95rem, 1.3vw, 1.15rem);
         }
     }
-    // Animated orb gradient — background-size must be >100% for position animation to work
-    background-color: var(--background-color) !important;
-    background-image:
-        radial-gradient(ellipse 70% 60% at 0% 0%, hsl(var(--h), 70%, 90%) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 70% at 100% 100%, hsl(var(--hc), 60%, 88%) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 50% at 60% 20%, hsl(var(--ha1), 55%, 92%) 0%, transparent 60%) !important;
-    background-size: 200% 200%, 200% 200%, 200% 200% !important;
-    background-position: 0% 0%, 100% 100%, 60% 20%;
-    animation: hero-orbs-drift 14s ease-in-out infinite alternate;
+    // Background gradient — commented out pending rework across all sections
+    // background-color: var(--background-color) !important;
+    // background-image:
+    //     radial-gradient(ellipse 70% 60% at 0% 0%, hsl(var(--h), 70%, 90%) 0%, transparent 60%),
+    //     radial-gradient(ellipse 60% 70% at 100% 100%, hsl(var(--hc), 60%, 88%) 0%, transparent 60%),
+    //     radial-gradient(ellipse 50% 50% at 60% 20%, hsl(var(--ha1), 55%, 92%) 0%, transparent 60%) !important;
+    // background-size: 200% 200%, 200% 200%, 200% 200% !important;
+    // background-position: 0% 0%, 100% 100%, 60% 20%;
+    // animation: hero-orbs-drift 14s ease-in-out infinite alternate;
     transition: color $transition-smooth !important;
 
     h1 {
         letter-spacing: 0.02em;
         line-height: 1.3;
-        // Padding-bottom extends the painted background region so gradient-clip
-        // doesn't cut off the bottom of the letterforms (WebKit quirk)
         padding-bottom: 0.25em;
-        background: linear-gradient(135deg,
-            hsl(var(--h), 80%, 40%),
-            hsl(var(--ha1), 75%, 36%));
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: hsl(var(--h), 60%, 38%);
     }
 
     .subtitle {
         opacity: 0.85;
         color: hsl(var(--h), 20%, 38%);
+    }
+
+    // #9: first paragraph of bio — the 3 punchy sentences get strong leading
+    .content > p:first-child {
+        font-size: 1.05em;
+        line-height: 1.75;
+        em { font-style: normal; }
+        // Each sentence ends with ". I" — style them as visual beats
+        strong {
+            color: hsl(var(--h), 60%, 38%);
+            -webkit-text-fill-color: hsl(var(--h), 60%, 38%);
+        }
     }
 
     img {
@@ -214,18 +200,20 @@ body > .meta:first-of-type.left-image {
     // Scroll hint chevron — injected by JS, position: absolute so it's out of grid flow
     .hero-scroll-hint {
         position: absolute;
-        bottom: 28px;
+        bottom: 32px;
         left: 50%;
         transform: translateX(-50%);
-        z-index: 2;
-        opacity: 0.35;
+        z-index: 10;
+        opacity: 0.6;
         animation: hero-chevron-bounce 2.2s ease-in-out infinite;
         transition: opacity 0.4s;
         pointer-events: none;
-        font-size: 22px;
-        color: hsl(var(--h), 40%, 45%);
+        font-size: 32px;
+        line-height: 1;
+        color: hsl(var(--h), 50%, 45%);
+        filter: drop-shadow(0 2px 6px hsla(var(--h), 40%, 40%, 0.25));
         &::after {
-            content: "↓";
+            content: "⌄";
             display: block;
         }
     }
@@ -235,24 +223,20 @@ body > .meta:first-of-type.left-image {
 }
 
 .dark body > .meta:first-of-type.left-image {
-    background-image:
-        radial-gradient(ellipse 70% 60% at 0% 0%, hsl(var(--h), 50%, 16%) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 70% at 100% 100%, hsl(var(--hc), 40%, 13%) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 50% at 60% 20%, hsl(var(--ha1), 45%, 14%) 0%, transparent 60%) !important;
-    background-size: 200% 200%, 200% 200%, 200% 200% !important;
+    // background-image: commented out — pending rework across all sections
+    // radial-gradient(ellipse 70% 60% at 0% 0%, hsl(var(--h), 50%, 16%) 0%, transparent 60%),
+    // radial-gradient(ellipse 60% 70% at 100% 100%, hsl(var(--hc), 40%, 13%) 0%, transparent 60%),
+    // radial-gradient(ellipse 50% 50% at 60% 20%, hsl(var(--ha1), 45%, 14%) 0%, transparent 60%) !important;
+    // background-size: 200% 200%, 200% 200%, 200% 200% !important;
 
     h1 {
-        background: linear-gradient(135deg,
-            hsl(var(--h), 75%, 65%),
-            hsl(var(--ha1), 70%, 60%));
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: hsl(var(--h), 60%, 68%);
     }
     .subtitle {
         color: hsl(var(--h), 15%, 65%);
     }
 }
+
 
 @keyframes hero-orbs-drift {
     0%   { background-position: 0% 0%,   100% 100%, 60% 20%; }
@@ -272,9 +256,7 @@ body > .meta:first-of-type.left-image {
 
 @media (prefers-reduced-motion: reduce) {
     body > .meta:first-of-type.left-image,
-    body > .meta:first-of-type.left-image h1,
-    body > .meta:first-of-type.left-image img,
-    body > .meta:first-of-type.left-image .hero-scroll-hint {
+    body > .meta:first-of-type.left-image img {
         animation: none !important;
     }
 }
