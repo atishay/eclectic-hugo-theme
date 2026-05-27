@@ -167,7 +167,7 @@ body > .meta:first-of-type.left-image {
     // At large screens: scale fonts and push content toward vertical center
     @include media(">lg") {
         // ~350px is approx content block height; center it within 100dvh minus header
-        padding-top: max(80px, calc(50dvh - 280px)) !important;
+        padding-top: unquote("max(80px, calc(50dvh - 280px))") !important;
         h1 {
             font-size: clamp(2rem, 3.5vw, 3rem);
             margin-top: 0 !important;
@@ -176,14 +176,15 @@ body > .meta:first-of-type.left-image {
             font-size: clamp(0.95rem, 1.3vw, 1.15rem);
         }
     }
-    // Animated diagonal gradient: two overlapping color stops shifting position
+    // Animated orb gradient — background-size must be >100% for position animation to work
     background-color: var(--background-color) !important;
     background-image:
-        radial-gradient(ellipse 100% 80% at 0% 0%, hsl(var(--h), 60%, 92%) 0%, transparent 55%),
-        radial-gradient(ellipse 80% 100% at 100% 100%, hsl(var(--hc), 50%, 90%) 0%, transparent 55%),
-        radial-gradient(ellipse 60% 60% at 50% 50%, hsl(var(--ha1), 45%, 95%) 0%, transparent 65%) !important;
-    background-size: 100% 100% !important;
-    animation: hero-orbs-drift 20s ease-in-out infinite alternate;
+        radial-gradient(ellipse 70% 60% at 0% 0%, hsl(var(--h), 70%, 90%) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 70% at 100% 100%, hsl(var(--hc), 60%, 88%) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 60% 20%, hsl(var(--ha1), 55%, 92%) 0%, transparent 60%) !important;
+    background-size: 200% 200%, 200% 200%, 200% 200% !important;
+    background-position: 0% 0%, 100% 100%, 60% 20%;
+    animation: hero-orbs-drift 14s ease-in-out infinite alternate;
     transition: color $transition-smooth !important;
 
     h1 {
@@ -235,9 +236,10 @@ body > .meta:first-of-type.left-image {
 
 .dark body > .meta:first-of-type.left-image {
     background-image:
-        radial-gradient(ellipse 100% 80% at 0% 0%, hsl(var(--h), 40%, 14%) 0%, transparent 55%),
-        radial-gradient(ellipse 80% 100% at 100% 100%, hsl(var(--hc), 30%, 11%) 0%, transparent 55%),
-        radial-gradient(ellipse 60% 60% at 50% 50%, hsl(var(--ha1), 35%, 13%) 0%, transparent 65%) !important;
+        radial-gradient(ellipse 70% 60% at 0% 0%, hsl(var(--h), 50%, 16%) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 70% at 100% 100%, hsl(var(--hc), 40%, 13%) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 60% 20%, hsl(var(--ha1), 45%, 14%) 0%, transparent 60%) !important;
+    background-size: 200% 200%, 200% 200%, 200% 200% !important;
 
     h1 {
         background: linear-gradient(135deg,
@@ -253,10 +255,9 @@ body > .meta:first-of-type.left-image {
 }
 
 @keyframes hero-orbs-drift {
-    0%   { background-position: 0% 0%, 100% 100%, 50% 50%; }
-    33%  { background-position: 5% 10%, 95% 90%, 45% 55%; }
-    66%  { background-position: 10% 5%, 90% 95%, 55% 45%; }
-    100% { background-position: 3% 8%, 97% 92%, 48% 52%; }
+    0%   { background-position: 0% 0%,   100% 100%, 60% 20%; }
+    50%  { background-position: 30% 40%, 70% 60%,   40% 70%; }
+    100% { background-position: 10% 20%, 90% 80%,   55% 45%; }
 }
 @keyframes hero-blob-morph {
     0%, 100% { border-radius: 50%; }
